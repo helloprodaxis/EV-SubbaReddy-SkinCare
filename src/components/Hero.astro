@@ -1,136 +1,134 @@
 ---
 import { site } from "~/data/site";
-import Leaf from "./Leaf.astro";
+import SwirlBackdrop from "./SwirlBackdrop.astro";
+import Bouquet from "./Bouquet.astro";
 ---
 
 {/*
- * Hero — bento mosaic (8 tiles). Deliberately *not* the split-hero pattern
- * used by sudhahospitals / vinithacreations / prodaxis. Each tile is its
- * own statement: brand mark, big headline, brand quote, doctor card,
- * hours, stats, CTA, location pill.
+ * Hero — single-focal moment. One massive bold headline on a soft cream-swirl
+ * backdrop, with a credentials card floating left and a price chip floating
+ * right. Trust signals (avatars + count) sit beneath the CTA. Below the fold:
+ * a 3-column quote panel with a hand-drawn bouquet.
+ *
+ * Design references: Augustinus Bader, Aesop, Celestia (the screenshot the
+ * client shared). All assets are CSS/SVG we own — no stock imagery.
  */}
-<section class="relative pt-8 md:pt-12 pb-16 md:pb-24 overflow-hidden">
-  <div
-    class="absolute inset-0 -z-10 pointer-events-none"
-    aria-hidden="true"
-    style="background:
-      radial-gradient(50% 60% at 100% 0%, color-mix(in oklab, var(--color-sage) 50%, transparent) 0%, transparent 65%),
-      radial-gradient(45% 55% at 0% 100%, color-mix(in oklab, var(--color-rose-soft) 65%, transparent) 0%, transparent 65%),
-      var(--color-cashmere);"
-  ></div>
+<section class="relative min-h-[92vh] flex flex-col">
+  <SwirlBackdrop />
 
-  <div class="container-edge">
-    <div
-      class="grid gap-3 md:gap-4 grid-cols-2 md:grid-cols-6 auto-rows-[110px] md:auto-rows-[140px] lg:auto-rows-[150px]"
-    >
-      {/* TILE 1 — Brand wordmark + tagline */}
-      <div class="reveal col-span-2 row-span-2 md:col-span-3 md:row-span-3 tile tile-cashmere flex flex-col justify-between p-7 md:p-10">
-        <div class="flex items-center justify-between">
-          <span class="eyebrow">Est. {site.established} · {site.city}</span>
-          <Leaf size={32} color="var(--color-laurel)" rotation={-15} opacity={0.6} />
-        </div>
-        <h1 class="display-1">
-          Skin care, <br />
-          made <span class="accent-italic">soft.</span>
-        </h1>
-        <p class="text-[var(--color-ink-soft)] text-sm md:text-base max-w-sm leading-relaxed">
-          A clinic the way it should be — natural, calm, and rooted in evidence. Twenty years of dermatology, three doctors, one quiet promise.
-        </p>
-      </div>
-
-      {/* TILE 2 — Sage mood line */}
-      <div class="reveal col-span-2 row-span-1 md:col-span-3 md:row-span-1 tile tile-sage flex items-center justify-between p-7">
-        <p class="font-display text-lg md:text-xl font-light leading-tight max-w-[24ch]">
-          Natural &middot; Soft &middot; <em class="not-italic font-normal">Organic</em>
-        </p>
-        <Leaf size={36} color="var(--color-laurel)" rotation={45} opacity={0.7} />
-      </div>
-
-      {/* TILE 3 — Rose CTA */}
-      <div class="reveal col-span-2 row-span-1 md:col-span-2 md:row-span-2 tile tile-rose flex flex-col justify-between p-6 md:p-7">
-        <span class="eyebrow !text-[var(--color-laurel-deep)]/70">Book today</span>
-        <div>
-          <p class="display-3 !text-[var(--color-laurel-deep)] leading-[1.05]">
-            A consult.
-            <br />
-            <span class="font-light italic opacity-80">Then a plan.</span>
+  {/* TOP: hero copy */}
+  <div class="container-edge relative flex-1 pt-12 md:pt-20 pb-12 md:pb-16">
+    <div class="grid grid-cols-12 gap-6 items-start">
+      {/* Floating credentials card — left */}
+      <aside class="reveal hidden md:block col-span-3 md:col-span-3 mt-44 lg:mt-56">
+        <div class="tile bg-[var(--color-white)]/90 backdrop-blur-md border border-[var(--color-white)]/60 max-w-[230px] shadow-[0_25px_60px_-20px_rgb(45_54_43/0.18)]">
+          <div class="flex items-start justify-between">
+            <span class="text-[0.62rem] font-bold tracking-[0.22em] uppercase text-[var(--color-olive)]">Since {site.established}</span>
+            {/* Tiny rose pebble decoration */}
+            <span
+              class="-mt-10 -mr-3 w-14 h-14 blob-1"
+              style="background: radial-gradient(circle at 30% 30%, #f3cdce, #d77f83 70%, #a85f63);"
+              aria-hidden="true"
+            ></span>
+          </div>
+          <p class="mt-3 font-display font-light text-[var(--color-laurel)] text-base leading-snug">
+            Twenty years of <strong class="font-semibold text-[var(--color-rose-deep)]">JIPMER-trained</strong> dermatology in Kadapa.
           </p>
-          <a href="/book" class="btn btn-primary mt-5 !text-xs !py-3 !px-5">
-            Book Visit
-            <span class="arrow" aria-hidden="true">→</span>
+          <a href="/about" class="inline-block mt-5 text-[0.7rem] tracking-[0.2em] uppercase font-bold text-[var(--color-laurel)] underline underline-offset-4 decoration-[var(--color-rose-deep)]">
+            Our story →
           </a>
         </div>
-      </div>
+      </aside>
 
-      {/* TILE 4 — Hours */}
-      <div class="reveal col-span-1 row-span-1 tile p-5 md:p-6 flex flex-col justify-between">
-        <span class="eyebrow">Today</span>
-        <div>
-          <p class="font-display text-xl md:text-2xl font-light text-[var(--color-laurel)] leading-tight">9:30 — 1:30</p>
-          <p class="font-display text-xl md:text-2xl font-light text-[var(--color-laurel)] leading-tight">5:00 — 8:00</p>
-        </div>
-      </div>
+      {/* Centre — massive headline */}
+      <div class="reveal col-span-12 md:col-span-7 text-center md:text-left">
+        <h1 class="display-mega">
+          Skin&nbsp;Care.
+          <br />
+          <span class="!text-[var(--color-rose-deep)]">Refined.</span>
+        </h1>
 
-      {/* TILE 5 — Patients stat */}
-      <div class="reveal col-span-1 row-span-1 tile tile-laurel p-5 md:p-6 flex flex-col justify-between">
-        <span class="eyebrow !text-[var(--color-rose-soft)]/80">Patients</span>
-        <p class="font-display text-2xl md:text-3xl font-light leading-none">10k<span class="accent-italic">+</span></p>
-      </div>
-
-      {/* TILE 6 — Years + Specialists */}
-      <div class="reveal col-span-2 md:col-span-2 row-span-1 tile p-6 flex items-center justify-between">
-        <div>
-          <span class="eyebrow">Years</span>
-          <p class="font-display text-3xl md:text-4xl font-extralight text-[var(--color-laurel)] leading-none mt-1 tracking-tight">
-            20<span class="accent-italic">+</span>
-          </p>
-        </div>
-        <div class="text-right">
-          <span class="eyebrow">Specialists</span>
-          <p class="font-display text-3xl md:text-4xl font-extralight text-[var(--color-laurel)] leading-none mt-1 tracking-tight">
-            03
-          </p>
-        </div>
-      </div>
-
-      {/* TILE 7 — Founder card */}
-      <div class="reveal col-span-2 md:col-span-2 row-span-2 tile p-6 flex flex-col justify-between">
-        <div class="flex items-center gap-4">
-          <div
-            class="w-16 h-16 grid place-items-center bg-gradient-to-br from-[var(--color-sage)] to-[var(--color-olive)] text-[var(--color-laurel-deep)] font-display text-2xl font-light shrink-0 blob-1"
-          >
-            ES
-          </div>
-          <div>
-            <span class="eyebrow">Founder</span>
-            <p class="font-display text-base md:text-lg text-[var(--color-laurel)] mt-1 leading-tight">Dr. E.V. Subba Reddy</p>
-          </div>
-        </div>
-        <p class="text-xs md:text-sm text-[var(--color-ink-muted)] leading-relaxed">
-          MD, DD &middot; Ex-Registrar, JIPMER Hospital, Pondicherry. Two decades of dermatology, taught the way it was practiced — diagnose, then prescribe.
+        <p class="mt-6 md:mt-8 text-[var(--color-ink-soft)] text-base md:text-lg max-w-md md:max-w-lg leading-relaxed mx-auto md:mx-0">
+          Dermatology, laser and cosmetology — practiced calmly, explained plainly. Our new Kadapa clinic, now open.
         </p>
-        <a href="/doctors#subba-reddy" class="text-xs uppercase tracking-[0.18em] text-[var(--color-rose-deep)] font-bold hover:underline">
-          Read profile →
-        </a>
+
+        {/* CTA + trust group */}
+        <div class="mt-8 md:mt-10 flex flex-wrap items-center gap-5 justify-center md:justify-start">
+          <a href="/book" class="btn !bg-[var(--color-mauve)] !text-[var(--color-cashmere-soft)] hover:!bg-[var(--color-laurel)] !py-4 !px-9 !text-[0.78rem]">
+            Book a Consult
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+
+          {/* Avatar trust group — abstract orbs (no real photos) */}
+          <div class="flex items-center">
+            <div class="flex -space-x-2.5">
+              <span class="w-10 h-10 rounded-full ring-2 ring-[var(--color-cashmere)]" style="background: radial-gradient(circle at 30% 30%, #d4dcd1, #6b7466);" aria-hidden="true"></span>
+              <span class="w-10 h-10 rounded-full ring-2 ring-[var(--color-cashmere)]" style="background: radial-gradient(circle at 30% 30%, #eba6a9, #a85f63);" aria-hidden="true"></span>
+              <span class="w-10 h-10 rounded-full ring-2 ring-[var(--color-cashmere)]" style="background: radial-gradient(circle at 30% 30%, #f3cdce, #d77f83);" aria-hidden="true"></span>
+              <span class="w-10 h-10 rounded-full ring-2 ring-[var(--color-cashmere)] grid place-items-center bg-[var(--color-laurel)] text-[var(--color-cashmere-soft)] text-[0.66rem] font-bold tracking-tight">
+                10k+
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* TILE 8 — Location pin */}
-      <div class="reveal col-span-2 md:col-span-2 row-span-1 tile tile-laurel p-6 flex items-center justify-between">
-        <div>
-          <span class="eyebrow !text-[var(--color-rose-soft)]/80">New clinic</span>
-          <p class="font-display text-lg md:text-xl font-light leading-tight mt-1">{site.address.area}, {site.address.city}</p>
+      {/* Right — circular price/badge chip */}
+      <aside class="reveal hidden md:flex col-span-2 justify-end mt-2 lg:mt-4">
+        <div class="relative w-[120px] h-[120px] lg:w-[140px] lg:h-[140px] rounded-full border border-[var(--color-laurel)]/15 grid place-items-center text-center bg-[var(--color-cashmere)]/40 backdrop-blur-sm">
+          <div>
+            <p class="font-display font-light text-3xl lg:text-4xl text-[var(--color-laurel)] leading-none tracking-tight">
+              ₹<span class="font-semibold">500</span>
+            </p>
+            <p class="mt-2 text-[0.6rem] uppercase tracking-[0.2em] font-bold text-[var(--color-olive)]">per consult</p>
+          </div>
         </div>
+      </aside>
+    </div>
+  </div>
+
+  {/* DIVIDER ring like the Celestia ref */}
+  <div class="container-edge relative">
+    <div class="hairline"></div>
+    <div class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-[var(--color-laurel)]/15 bg-[var(--color-cashmere)] grid place-items-center">
+      <span class="w-2 h-2 rounded-full bg-[var(--color-rose-deep)]"></span>
+    </div>
+  </div>
+
+  {/* BOTTOM: 3-column quote band — bouquet | quote | CTA */}
+  <div class="container-edge relative pt-20 md:pt-24 pb-12 md:pb-16">
+    <div class="grid grid-cols-12 gap-8 items-end">
+      {/* Bouquet illustration */}
+      <div class="reveal col-span-12 md:col-span-4 lg:col-span-3 flex justify-center md:justify-start">
+        <Bouquet width={320} height={440} />
+      </div>
+
+      {/* Centre quote */}
+      <div class="reveal col-span-12 md:col-span-5 lg:col-span-6 text-center pb-8">
+        <p class="font-display text-2xl md:text-3xl font-light text-[var(--color-laurel)] leading-snug max-w-xl mx-auto">
+          Build the kind of skin care experience our patients tell their friends about — clear answers, calm rooms, real results.
+        </p>
+        <div class="mt-6 flex items-center justify-center gap-2 text-[var(--color-rose-deep)]" aria-hidden="true">
+          <span class="w-1 h-1 rounded-full bg-current"></span>
+          <span class="w-2 h-2 rounded-full bg-current"></span>
+          <span class="w-1 h-1 rounded-full bg-current"></span>
+        </div>
+        <p class="mt-3 text-[0.7rem] uppercase tracking-[0.32em] font-bold text-[var(--color-olive)]">
+          A clinic worth the trip
+        </p>
+      </div>
+
+      {/* Right side CTA column */}
+      <div class="reveal col-span-12 md:col-span-3 text-center md:text-right pb-8">
+        <p class="font-display text-3xl md:text-4xl font-light text-[var(--color-laurel)] leading-tight">
+          Awaken<br />
+          <span class="accent-italic">Better Skin.</span>
+        </p>
         <a
-          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address.mapsQuery)}`}
-          target="_blank"
-          rel="noopener"
-          class="grid place-items-center w-12 h-12 rounded-full bg-[var(--color-rose)] text-[var(--color-laurel-deep)] hover:scale-105 transition-transform"
-          aria-label="Open in Maps"
+          href="/book"
+          class="inline-block mt-5 text-[0.72rem] uppercase tracking-[0.28em] font-bold text-[var(--color-laurel)] underline underline-offset-[6px] decoration-[var(--color-rose-deep)] decoration-2"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-            <path d="M12 22s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12Z" stroke-linejoin="round"/>
-            <circle cx="12" cy="10" r="2.5"/>
-          </svg>
+          Book Now →
         </a>
       </div>
     </div>

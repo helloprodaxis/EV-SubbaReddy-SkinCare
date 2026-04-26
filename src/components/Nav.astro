@@ -1,9 +1,7 @@
 ---
 import { site } from "~/data/site";
-import Leaf from "./Leaf.astro";
 
 const links = [
-  { href: "/",           label: "Home" },
   { href: "/about",      label: "About" },
   { href: "/treatments", label: "Treatments" },
   { href: "/doctors",    label: "Doctors" },
@@ -15,65 +13,68 @@ const isActive = (href: string) =>
   href === "/" ? path === "/" : path.startsWith(href);
 ---
 
+{/*
+ * Nav — minimal floating header (Aesop / Celestia inspired).
+ * Tiny rose monogram + clinic name on left, centre-spaced links, circular
+ * arrow CTA on the right. No borders, no surface — only a soft cashmere
+ * blur behind on scroll.
+ */}
 <header
   id="site-nav"
-  class="sticky top-0 z-40 border-b border-[color-mix(in_oklab,var(--color-laurel)_8%,transparent)] backdrop-blur-md bg-[color-mix(in_oklab,var(--color-cashmere)_82%,transparent)]"
+  class="sticky top-0 z-40 backdrop-blur-md bg-[color-mix(in_oklab,var(--color-cashmere)_70%,transparent)]"
   transition:persist
 >
-  <div class="container-edge flex items-center justify-between gap-6 py-4 md:py-5">
-    <a href="/" class="flex items-center gap-3 group" aria-label={site.name}>
+  <div class="container-edge grid grid-cols-3 items-center gap-6 py-5 md:py-6">
+    {/* Brand monogram + name */}
+    <a href="/" class="flex items-center gap-3 group justify-self-start" aria-label={site.name}>
       <span
-        class="grid place-items-center w-10 h-10 bg-[var(--color-laurel)] text-[var(--color-cashmere-soft)] font-display text-xl font-light leading-none transition-transform group-hover:scale-105 blob-1"
+        class="grid place-items-center w-9 h-9 rounded-full bg-[var(--color-rose-deep)] text-[var(--color-cashmere-soft)] font-display text-sm font-bold leading-none transition-transform group-hover:rotate-12"
         aria-hidden="true"
       >
-        S
+        +
       </span>
       <span class="hidden sm:flex flex-col leading-tight">
-        <span class="font-display text-[1rem] font-light tracking-tight text-[var(--color-laurel)]">
-          Dr. E.V. Subba Reddy
+        <span class="font-display text-[0.92rem] font-semibold tracking-tight text-[var(--color-laurel)]">
+          Subba Reddy
         </span>
-        <span class="text-[0.66rem] uppercase tracking-[0.22em] font-bold text-[var(--color-olive)]">
-          Advanced Skin &amp; Laser Centre
+        <span class="text-[0.6rem] uppercase tracking-[0.22em] font-bold text-[var(--color-olive)]">
+          Skin · Laser · Hair
         </span>
       </span>
     </a>
 
-    <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
+    {/* Centre nav links */}
+    <nav class="hidden lg:flex items-center justify-center gap-9" aria-label="Primary">
       {links.map((link) => (
         <a
           href={link.href}
           class:list={[
-            "relative px-4 py-2 text-[0.78rem] font-bold uppercase tracking-[0.16em] transition-colors",
+            "relative text-[0.72rem] font-bold uppercase tracking-[0.24em] transition-colors py-2",
             isActive(link.href)
               ? "text-[var(--color-rose-deep)]"
-              : "text-[var(--color-ink-soft)] hover:text-[var(--color-laurel)]",
+              : "text-[var(--color-laurel)] hover:text-[var(--color-rose-deep)]",
           ]}
         >
           {link.label}
           {isActive(link.href) && (
-            <span
-              class="absolute left-4 right-4 -bottom-0.5 h-px bg-[var(--color-rose-deep)]"
-              aria-hidden="true"
-            />
+            <span class="absolute left-0 right-0 -bottom-0 h-px bg-[var(--color-rose-deep)]" aria-hidden="true" />
           )}
         </a>
       ))}
     </nav>
 
-    <div class="flex items-center gap-3">
+    {/* Right side — circular CTA */}
+    <div class="flex items-center gap-3 justify-self-end">
       <a
-        href={`tel:${site.phones[0].tel}`}
-        class="hidden md:inline-flex items-center gap-2 text-[0.85rem] text-[var(--color-ink-soft)] hover:text-[var(--color-laurel)]"
-        aria-label="Call clinic"
+        href="/book"
+        class="hidden md:inline-flex items-center gap-3 text-[0.72rem] font-bold uppercase tracking-[0.24em] text-[var(--color-laurel)] hover:text-[var(--color-rose-deep)]"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        {site.phones[0].number}
-      </a>
-      <a href="/book" class="btn btn-primary !py-2.5 !px-4 text-[0.72rem]">
-        Book Visit
-        <span class="arrow" aria-hidden="true">→</span>
+        <span>Get Started</span>
+        <span class="grid place-items-center w-10 h-10 rounded-full bg-[var(--color-white)] shadow-[0_4px_14px_rgb(45_54_43/0.12)] text-[var(--color-laurel)] transition-transform hover:rotate-45" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+          </svg>
+        </span>
       </a>
       <button
         id="nav-toggle"
@@ -94,14 +95,12 @@ const isActive = (href: string) =>
     class="lg:hidden hidden border-t border-[color-mix(in_oklab,var(--color-laurel)_8%,transparent)] bg-[var(--color-cashmere)]"
   >
     <nav class="container-edge flex flex-col py-3" aria-label="Mobile">
-      {links.map((link) => (
+      {[{ href: "/", label: "Home" }, ...links].map((link) => (
         <a
           href={link.href}
           class:list={[
             "py-3 text-base font-medium border-b border-[color-mix(in_oklab,var(--color-laurel)_6%,transparent)] last:border-0",
-            isActive(link.href)
-              ? "text-[var(--color-rose-deep)]"
-              : "text-[var(--color-ink-soft)]",
+            isActive(link.href) ? "text-[var(--color-rose-deep)]" : "text-[var(--color-ink-soft)]",
           ]}
         >
           {link.label}

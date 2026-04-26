@@ -126,10 +126,21 @@
     color: var(--color-olive);
   }
 
-  /* Display sizes — Poppins extralight, lots of negative tracking. */
+  /* Display sizes.
+   *  display-mega → Poppins Black at hero scale (the "premium moment").
+   *  display-1/2/3 → lighter weights for inner page heroes & section heads.
+   */
+  .display-mega {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(3.5rem, 11vw, 10.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    color: var(--color-onyx);
+  }
   .display-1 {
     font-family: var(--font-display);
-    font-weight: 200;
+    font-weight: 300;
     font-size: clamp(2.75rem, 6.5vw, 6rem);
     line-height: 1.02;
     letter-spacing: -0.04em;
@@ -143,7 +154,7 @@
   }
   .display-3 {
     font-family: var(--font-display);
-    font-weight: 300;
+    font-weight: 400;
     font-size: clamp(1.5rem, 2.8vw, 2.25rem);
     line-height: 1.15;
     letter-spacing: -0.015em;

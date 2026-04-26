@@ -3,24 +3,26 @@ const items = [
   "natural",
   "soft",
   "organic",
-  "skin",
-  "hair",
-  "laser",
   "calm",
   "evidence-led",
+  "considered",
   "transparent",
   "kadapa",
 ];
 const doubled = [...items, ...items];
 ---
 
-<div class="relative overflow-hidden py-8 md:py-10 bg-[var(--color-laurel)] text-[var(--color-cashmere-soft)]">
+{/*
+ * Marquee — quiet, cream-on-cream sweep of the brand mood words. Kept
+ * subtle so the hero remains the focal point.
+ */}
+<div class="relative overflow-hidden py-6 md:py-8 border-y border-[color-mix(in_oklab,var(--color-laurel)_6%,transparent)] bg-[var(--color-cashmere-soft)]">
   <div class="ticker">
     {doubled.map((item) => (
-      <span class="flex items-center gap-10 shrink-0 font-display text-2xl md:text-4xl font-extralight italic tracking-tight">
+      <span class="flex items-center gap-10 shrink-0 font-display text-3xl md:text-5xl font-extralight italic tracking-tight text-[var(--color-laurel)]/55">
         {item}
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <circle cx="7" cy="7" r="3" fill="var(--color-rose)"/>
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+          <circle cx="5" cy="5" r="2" fill="var(--color-rose-deep)"/>
         </svg>
       </span>
     ))}

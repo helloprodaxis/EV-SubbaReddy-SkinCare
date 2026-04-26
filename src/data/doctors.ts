@@ -37,12 +37,12 @@ export const doctors: Doctor[] = [
     ],
   },
   {
-    slug: "siva-shankar-reddy",
-    name: "Dr. S. Siva Shankar Reddy",
+    slug: "siva-sankar-reddy",
+    name: "Dr. S. Siva Sankar Reddy",
     qualifications: "MBBS, DDVL",
     role: "Skin & STD Specialist",
     specialties: ["General Dermatology", "STD", "Allergy"],
-    bio: "Dr. Siva Shankar Reddy handles general dermatology and confidential STD consultations with a discreet, judgement-free approach.",
+    bio: "Dr. Siva Sankar Reddy handles general dermatology and confidential STD consultations with a discreet, judgement-free approach.",
     highlights: [
       "Diploma in Dermatology, Venereology & Leprosy",
       "Confidential consultation protocol",
