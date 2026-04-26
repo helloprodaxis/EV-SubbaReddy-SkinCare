@@ -129,38 +129,27 @@ const navGroups = [
       <div class="hairline opacity-30"></div>
     </div>
 
-    {/* CINEMATIC CREDIT — end-credits style */}
-    <div class="relative container-edge py-16 md:py-24 text-center">
-      <p class="credit-line text-[var(--color-rose)]">A Project by</p>
-
-      {/* Massive Prodaxis lockup */}
-      <a
-        href="https://prodaxis.in"
-        target="_blank"
-        rel="noopener"
-        class="group inline-flex items-baseline gap-3 mt-5 hover:opacity-80 transition-opacity"
-      >
-        <span class="font-display font-extralight text-[clamp(3.5rem,10vw,9rem)] leading-none tracking-[-0.05em] !text-[var(--color-paper)]">
-          Prodaxis
-        </span>
-        <span class="font-display font-extralight text-[clamp(2rem,5vw,4rem)] leading-none !text-[var(--color-rose)] italic">
-          .in
-        </span>
-      </a>
-
-      <p class="mt-7 text-sm md:text-base text-[color-mix(in_oklab,var(--color-paper)_70%,transparent)] max-w-xl mx-auto leading-relaxed">
-        End-to-end digital platforms for healthcare, hospitality and small business —
-        designed, built and supported by a single team.
+    {/* PRODAXIS CREDIT — small, single line, tasteful attribution. */}
+    <div class="relative container-edge py-10 md:py-12 text-center">
+      <Ornament variant="invert" size="sm" class="mb-6" />
+      <p class="credit-line !text-[0.62rem] text-[color-mix(in_oklab,var(--color-paper)_70%,transparent)]">
+        A Project by
+        <a
+          href="https://prodaxis.in"
+          target="_blank"
+          rel="noopener"
+          class="ml-2 !text-[var(--color-paper)] underline underline-offset-4 decoration-[var(--color-rose)] hover:!text-[var(--color-rose)] transition-colors"
+        >
+          Prodaxis<span class="!text-[var(--color-rose)] italic">.in</span>
+        </a>
+        <span class="mx-3 opacity-30">·</span>
+        <a
+          href="mailto:hello@prodaxis.in"
+          class="!text-[color-mix(in_oklab,var(--color-paper)_70%,transparent)] hover:!text-[var(--color-rose)] transition-colors"
+        >
+          hello@prodaxis.in
+        </a>
       </p>
-
-      <Ornament variant="invert" size="lg" class="mt-9" />
-
-      <a
-        href="mailto:hello@prodaxis.in"
-        class="inline-block mt-7 credit-line !text-[0.68rem] !text-[var(--color-paper)] underline underline-offset-[6px] decoration-[var(--color-rose)] decoration-2"
-      >
-        hello@prodaxis.in
-      </a>
     </div>
 
     {/* TINY LEGAL FOOTER */}
