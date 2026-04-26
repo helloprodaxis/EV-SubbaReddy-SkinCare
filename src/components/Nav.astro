@@ -23,20 +23,24 @@ const isActive = (href: string) =>
   class="sticky top-0 z-40 backdrop-blur-md bg-[color-mix(in_oklab,var(--color-paper)_80%,transparent)]"
   transition:persist
 >
-  <div class="container-edge grid grid-cols-3 items-center gap-6 py-5 md:py-6">
-    <a href="/" class="flex items-center gap-3 group justify-self-start" aria-label={site.fullName}>
+  <div class="container-edge grid grid-cols-[auto_1fr_auto] lg:grid-cols-3 items-center gap-3 md:gap-6 py-4 md:py-6">
+    <a href="/" class="flex items-center gap-2.5 md:gap-3 group min-w-0" aria-label={site.fullName}>
       <span
-        class="grid place-items-center w-9 h-9 rounded-full bg-[var(--color-rose-rich)] text-[var(--color-paper)] font-display text-base font-bold leading-none transition-transform group-hover:rotate-12"
+        class="grid place-items-center w-9 h-9 rounded-full bg-[var(--color-rose-rich)] text-[var(--color-paper)] font-display text-base font-bold leading-none transition-transform group-hover:rotate-12 shrink-0"
         aria-hidden="true"
       >
         +
       </span>
-      <span class="hidden sm:flex flex-col leading-tight">
-        <span class="font-display text-[0.92rem] font-semibold tracking-tight text-[var(--color-ink)]">
-          Dr. E V Subba Reddy
+      <span class="flex flex-col leading-tight min-w-0">
+        <span class="font-display text-[0.78rem] sm:text-[0.92rem] font-semibold tracking-tight text-[var(--color-ink)] truncate">
+          <span class="hidden sm:inline">Dr. E V Subba Reddy</span>
+          <span class="sm:hidden">Dr. Subba Reddy</span>
         </span>
-        <span class="text-[0.58rem] uppercase tracking-[0.24em] font-bold text-[var(--color-rose-deep)]">
+        <span class="hidden sm:inline text-[0.56rem] sm:text-[0.58rem] uppercase tracking-[0.22em] sm:tracking-[0.24em] font-bold text-[var(--color-rose-deep)] truncate">
           Advanced Skin and Laser Center
+        </span>
+        <span class="sm:hidden text-[0.55rem] uppercase tracking-[0.2em] font-bold text-[var(--color-rose-deep)] truncate">
+          Skin · Laser · Hair
         </span>
       </span>
     </a>

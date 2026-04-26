@@ -12,11 +12,13 @@ interface Props {
 const { width = 380, height = 520, class: className = "" } = Astro.props;
 ---
 
+{/* When `class` overrides sizing (responsive), width/height stop applying. */}
 <svg
   width={width}
   height={height}
   viewBox="0 0 380 520"
   fill="none"
+  preserveAspectRatio="xMidYMid meet"
   class={className}
   aria-hidden="true"
 >

@@ -1,5 +1,6 @@
 ---
 import { site } from "~/data/site";
+import Ornament from "./Ornament.astro";
 
 const year = new Date().getFullYear();
 
@@ -105,7 +106,7 @@ const navGroups = [
           ))}
 
           {/* Hours */}
-          <div class="md:col-span-3 mt-2 grid grid-cols-2 md:grid-cols-3 gap-6 pt-6 border-t border-[color-mix(in_oklab,var(--color-paper)_10%,transparent)]">
+          <div class="md:col-span-3 mt-2 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-[color-mix(in_oklab,var(--color-paper)_10%,transparent)]">
             <div>
               <p class="credit-line text-[var(--color-rose)]">Mon – Sat (Morning)</p>
               <p class="font-display font-light text-xl mt-2 !text-[var(--color-paper)]">{site.hours.weekdays.morning}</p>
@@ -152,11 +153,7 @@ const navGroups = [
         designed, built and supported by a single team.
       </p>
 
-      <div class="mt-9 flex items-center justify-center gap-2 text-[var(--color-rose)]" aria-hidden="true">
-        <span class="w-1 h-1 rounded-full bg-current"></span>
-        <span class="w-2 h-2 rounded-full bg-current"></span>
-        <span class="w-1 h-1 rounded-full bg-current"></span>
-      </div>
+      <Ornament variant="invert" size="lg" class="mt-9" />
 
       <a
         href="mailto:hello@prodaxis.in"

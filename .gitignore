@@ -15,12 +15,11 @@ pnpm-debug.log*
 .env
 .env.production
 .env.local
-.dev.vars
 
 # editor
 .vscode/
 .idea/
 .DS_Store
 
-# wrangler
-.wrangler/
+# Vercel
+.vercel/

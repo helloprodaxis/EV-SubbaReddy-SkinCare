@@ -1,5 +1,0 @@
-# Copy to .dev.vars for local Pages Function dev (wrangler pages dev)
-# In production, set these in Cloudflare Pages → Settings → Environment Variables.
-RESEND_API_KEY=re_yourkey_here
-BOOKING_TO_EMAIL=clinic@drsubbareddyskin.in
-BOOKING_FROM_EMAIL=bookings@drsubbareddyskin.in

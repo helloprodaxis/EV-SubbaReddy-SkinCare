@@ -1,20 +1,19 @@
 /**
- * Cloudflare Pages Function — POST /api/book
+ * POST /api/book — Astro API endpoint, runs as a Vercel serverless function.
  *
- * Accepts the booking form payload, validates it, and emails the clinic via
- * Resend. Returns 200 on success, 4xx on validation failure, 5xx on Resend error.
+ * Validates the booking form payload and emails the clinic via Resend.
+ * Returns 200 on success, 4xx on validation failure, 5xx on Resend error.
  *
- * Env vars (set in Cloudflare Pages → Settings → Environment Variables):
+ * Env vars (set in Vercel → Settings → Environment Variables):
  *   RESEND_API_KEY      — required
  *   BOOKING_TO_EMAIL    — clinic inbox (defaults to appointments@drsubbareddyskin.in)
  *   BOOKING_FROM_EMAIL  — verified Resend sender (defaults to bookings@drsubbareddyskin.in)
  */
 
-interface Env {
-  RESEND_API_KEY: string;
-  BOOKING_TO_EMAIL?: string;
-  BOOKING_FROM_EMAIL?: string;
-}
+import type { APIRoute } from "astro";
+
+// Force this route to be SSR (the rest of the site is prerendered).
+export const prerender = false;
 
 interface Booking {
   name: string;
@@ -64,20 +63,20 @@ function validate(b: unknown): { ok: true; data: Booking } | { ok: false; error:
 
 function renderEmail(b: Booking): string {
   const row = (k: string, v: string | undefined) =>
-    v ? `<tr><td style="padding:6px 12px;color:#7a6e60;font:500 12px/1 'Inter',sans-serif;text-transform:uppercase;letter-spacing:.12em;">${k}</td><td style="padding:6px 12px;color:#2a2520;font:400 15px/1.5 'Inter',sans-serif;">${escapeHtml(v)}</td></tr>`
+    v ? `<tr><td style="padding:6px 12px;color:#7a8590;font:700 11px/1 'Lato',sans-serif;text-transform:uppercase;letter-spacing:.18em;">${k}</td><td style="padding:6px 12px;color:#1a2530;font:400 15px/1.5 'Lato',sans-serif;">${escapeHtml(v)}</td></tr>`
       : "";
 
   return `<!doctype html>
-<html><body style="margin:0;background:#f7f1e8;padding:32px;font-family:'Inter',Arial,sans-serif;">
-  <table role="presentation" width="100%" style="max-width:600px;margin:0 auto;background:#fdfaf4;border-radius:16px;overflow:hidden;">
+<html><body style="margin:0;background:#fdfaf7;padding:32px;font-family:'Lato',Arial,sans-serif;">
+  <table role="presentation" width="100%" style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden;">
     <tr><td style="padding:32px 32px 8px;">
-      <p style="margin:0;color:#a85f44;font-size:11px;letter-spacing:.22em;text-transform:uppercase;">New booking request</p>
-      <h1 style="margin:8px 0 0;font:300 28px/1.1 Georgia,serif;color:#2a2520;letter-spacing:-0.02em;">
+      <p style="margin:0;color:#c97583;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;">New booking request</p>
+      <h1 style="margin:8px 0 0;font:300 28px/1.1 'Poppins',Georgia,serif;color:#1a2530;letter-spacing:-0.02em;">
         ${escapeHtml(b.name)}
       </h1>
     </td></tr>
     <tr><td style="padding:8px 32px 32px;">
-      <table role="presentation" width="100%" style="border-top:1px solid #ece0cd;border-bottom:1px solid #ece0cd;">
+      <table role="presentation" width="100%" style="border-top:1px solid #f3cdce;border-bottom:1px solid #f3cdce;">
         ${row("Phone", b.phone)}
         ${row("Email", b.email)}
         ${row("Concern", b.concern)}
@@ -85,17 +84,17 @@ function renderEmail(b: Booking): string {
         ${row("Date", b.preferredDate)}
         ${row("Slot", b.preferredSlot)}
       </table>
-      ${b.notes ? `<div style="margin-top:24px;padding:18px;background:#f2e9da;border-radius:12px;color:#4a3f35;font-size:14px;line-height:1.6;"><strong style="display:block;color:#a85f44;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;">Notes</strong>${escapeHtml(b.notes).replace(/\n/g, "<br>")}</div>` : ""}
-      <p style="margin:24px 0 0;font-size:12px;color:#7a6e60;">Submitted from drsubbareddyskin.in · ${new Date().toISOString()}</p>
+      ${b.notes ? `<div style="margin-top:24px;padding:18px;background:#dce7ee;border-radius:12px;color:#2a3741;font-size:14px;line-height:1.6;"><strong style="display:block;color:#c97583;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;">Notes</strong>${escapeHtml(b.notes).replace(/\n/g, "<br>")}</div>` : ""}
+      <p style="margin:24px 0 0;font-size:12px;color:#7a8590;">Submitted from drsubbareddyskin.in · ${new Date().toISOString()}</p>
     </td></tr>
   </table>
 </body></html>`;
 }
 
-export const onRequestPost: PagesFunction<Env> = async (ctx) => {
+export const POST: APIRoute = async ({ request }) => {
   let body: unknown;
   try {
-    body = await ctx.request.json();
+    body = await request.json();
   } catch {
     return new Response(JSON.stringify({ error: "Invalid JSON." }), {
       status: 400, headers: { "content-type": "application/json" },
@@ -109,21 +108,23 @@ export const onRequestPost: PagesFunction<Env> = async (ctx) => {
     });
   }
 
-  if (!ctx.env.RESEND_API_KEY) {
-    // Fail soft in dev — log to console so the form still feels responsive.
+  const apiKey = process.env.RESEND_API_KEY ?? import.meta.env.RESEND_API_KEY;
+
+  if (!apiKey) {
+    // Dev fallback — no email, but UX still feels responsive.
     console.warn("[/api/book] RESEND_API_KEY not set. Booking payload:", v.data);
     return new Response(JSON.stringify({ ok: true, dev: true }), {
       status: 200, headers: { "content-type": "application/json" },
     });
   }
 
-  const to = ctx.env.BOOKING_TO_EMAIL ?? "appointments@drsubbareddyskin.in";
-  const from = ctx.env.BOOKING_FROM_EMAIL ?? "bookings@drsubbareddyskin.in";
+  const to = process.env.BOOKING_TO_EMAIL ?? "appointments@drsubbareddyskin.in";
+  const from = process.env.BOOKING_FROM_EMAIL ?? "bookings@drsubbareddyskin.in";
 
   const resp = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      "authorization": `Bearer ${ctx.env.RESEND_API_KEY}`,
+      "authorization": `Bearer ${apiKey}`,
       "content-type": "application/json",
     },
     body: JSON.stringify({

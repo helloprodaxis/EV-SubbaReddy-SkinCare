@@ -10,7 +10,7 @@ export const site = {
   shortName: "Subba Reddy Skin",
   description:
     "Kadapa's trusted dermatology, cosmetology and laser clinic — led by Dr. E V Subba Reddy, MD, ex-Registrar JIPMER Pondicherry.",
-  url: "https://drsubbareddyskin.in",
+  url: "https://dr-ev-subba-reddy-skin-care.vercel.app",
   city: "Kadapa",
   state: "Andhra Pradesh",
   country: "India",

@@ -1,0 +1,45 @@
+---
+/**
+ * Chapter divider ornament — a small printed-book mark.
+ *   ─────  ◦  ─────
+ * Replaces the previous "• • •" dot row. More refined and editorial.
+ *
+ * variant="default" → for cream/light backgrounds
+ * variant="invert"  → for dark backgrounds (footer, testimonials)
+ * size="sm"         → small inline mark
+ * size="md"         → standard
+ * size="lg"         → section divider
+ */
+interface Props {
+  variant?: "default" | "invert";
+  size?: "sm" | "md" | "lg";
+  class?: string;
+}
+const { variant = "default", size = "md", class: className = "" } = Astro.props;
+
+const color = variant === "invert"
+  ? "var(--color-rose)"
+  : "var(--color-rose-deep)";
+
+const dashLengths = {
+  sm: "w-6",
+  md: "w-10",
+  lg: "w-16",
+};
+
+const ringSizes = {
+  sm: "w-1.5 h-1.5",
+  md: "w-2 h-2",
+  lg: "w-2.5 h-2.5",
+};
+---
+
+<div
+  class={`flex items-center justify-center gap-3 ${className}`}
+  style={`color:${color};`}
+  aria-hidden="true"
+>
+  <span class={`${dashLengths[size]} h-px bg-current opacity-70`}></span>
+  <span class={`${ringSizes[size]} rounded-full border border-current`}></span>
+  <span class={`${dashLengths[size]} h-px bg-current opacity-70`}></span>
+</div>
