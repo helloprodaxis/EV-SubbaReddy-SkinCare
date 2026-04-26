@@ -31,16 +31,13 @@ const isActive = (href: string) =>
       >
         +
       </span>
+      {/* Always the full clinic name — never shortened, on any viewport. */}
       <span class="flex flex-col leading-tight min-w-0">
         <span class="font-display text-[0.78rem] sm:text-[0.92rem] font-semibold tracking-tight text-[var(--color-ink)] truncate">
-          <span class="hidden sm:inline">Dr. E V Subba Reddy</span>
-          <span class="sm:hidden">Dr. Subba Reddy</span>
+          Dr. E V Subba Reddy
         </span>
-        <span class="hidden sm:inline text-[0.56rem] sm:text-[0.58rem] uppercase tracking-[0.22em] sm:tracking-[0.24em] font-bold text-[var(--color-rose-deep)] truncate">
+        <span class="text-[0.5rem] sm:text-[0.58rem] uppercase tracking-[0.18em] sm:tracking-[0.24em] font-bold text-[var(--color-rose-deep)] truncate">
           Advanced Skin and Laser Center
-        </span>
-        <span class="sm:hidden text-[0.55rem] uppercase tracking-[0.2em] font-bold text-[var(--color-rose-deep)] truncate">
-          Skin · Laser · Hair
         </span>
       </span>
     </a>
