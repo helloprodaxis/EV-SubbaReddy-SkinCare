@@ -1,0 +1,39 @@
+---
+import { site } from "~/data/site";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": `${site.name} — ${site.tagline}`,
+  "url": site.url,
+  "image": `${site.url}/og-default.svg`,
+  "telephone": site.phones[0].tel,
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": `${site.address.line1}, ${site.address.line2}`,
+    "addressLocality": site.address.city,
+    "addressRegion": site.address.state,
+    "postalCode": site.address.pincode,
+    "addressCountry": "IN",
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:30",
+      "closes": "13:30",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "17:00",
+      "closes": "20:00",
+    },
+  ],
+  "medicalSpecialty": ["Dermatology", "Cosmetic Dermatology", "Laser Therapy"],
+  "areaServed": { "@type": "City", "name": site.city },
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

@@ -1,0 +1,58 @@
+---
+import { doctors } from "~/data/doctors";
+
+// Color palette per doctor — keeps the visual storytelling consistent.
+const palette = [
+  { from: "#c97b5c", to: "#a85f44" }, // clay
+  { from: "#7b8a6f", to: "#5a6b50" }, // sage
+  { from: "#b8956a", to: "#8a6e4e" }, // gold
+];
+---
+
+<section class="container-edge py-24 md:py-32">
+  <div class="max-w-2xl reveal">
+    <p class="eyebrow">The doctors</p>
+    <h2 class="display-2 mt-4">
+      Three specialists.
+      <br />
+      <span class="accent-italic">One standard.</span>
+    </h2>
+  </div>
+
+  <div class="hairline mt-10"></div>
+
+  <div class="mt-12 grid gap-8 md:grid-cols-3">
+    {doctors.map((d, i) => (
+      <a
+        href={`/doctors#${d.slug}`}
+        class="reveal group block"
+        style={`transition-delay:${i * 80}ms`}
+      >
+        <div
+          class="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-[0_20px_50px_-20px_rgb(42_37_32/0.25)] transition-transform group-hover:-translate-y-1"
+          style={`background: linear-gradient(160deg, ${palette[i].from}, ${palette[i].to});`}
+        >
+          {/* Initials monogram — print-style. */}
+          <div class="absolute inset-0 grid place-items-center">
+            <span class="font-display text-[6rem] md:text-[8rem] font-light text-[var(--color-paper)]/85 leading-none tracking-tighter">
+              {d.name.split(" ").slice(1).map((s) => s[0]).join("")}
+            </span>
+          </div>
+          <div class="absolute top-4 left-4 right-4 flex justify-between text-[0.68rem] uppercase tracking-[0.2em] text-[var(--color-paper)]/85">
+            <span>0{i + 1}</span>
+            <span>{d.qualifications}</span>
+          </div>
+        </div>
+        <div class="mt-5">
+          <h3 class="font-display text-xl text-[var(--color-ink)] group-hover:text-[var(--color-clay-deep)] transition-colors">
+            {d.name}
+          </h3>
+          <p class="text-sm text-[var(--color-ink-muted)] mt-1">{d.role}</p>
+          <p class="text-xs text-[var(--color-ink-muted)] mt-3 uppercase tracking-[0.16em]">
+            {d.specialties.join(" · ")}
+          </p>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

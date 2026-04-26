@@ -1,0 +1,61 @@
+---
+const pillars = [
+  {
+    no: "01",
+    title: "Diagnose first",
+    body:
+      "Every visit starts with a real consultation — history, examination, and a plain-English explanation of what's actually going on with your skin.",
+  },
+  {
+    no: "02",
+    title: "Evidence-based protocols",
+    body:
+      "We use what the dermatology literature actually supports — not whatever's trending on Instagram. No mystery serums, no upselling.",
+  },
+  {
+    no: "03",
+    title: "Respect your time & money",
+    body:
+      "Treatments are sequenced for results, not revenue. We tell you up-front how many sessions you'll need, and what they'll cost.",
+  },
+];
+---
+
+<section class="relative bg-[var(--color-cream-warm)]">
+  <div class="container-edge py-24 md:py-36">
+    <div class="grid gap-16 lg:grid-cols-12 items-start">
+      <div class="lg:col-span-5 lg:sticky lg:top-28 reveal">
+        <p class="eyebrow">Our approach</p>
+        <h2 class="display-2 mt-4">
+          A clinic, not a
+          <br />
+          <span class="accent-italic">salon.</span>
+        </h2>
+        <p class="lead mt-6 max-w-md">
+          Cosmetic dermatology has been hijacked by marketing. We practice the way our
+          training taught us — clinical, conservative, results-led.
+        </p>
+      </div>
+
+      <ol class="lg:col-span-7 space-y-6">
+        {pillars.map((p, i) => (
+          <li class="reveal card !p-8 md:!p-10" style={`transition-delay:${i * 80}ms`}>
+            <div class="flex items-start gap-6">
+              <span class="font-display text-5xl md:text-6xl font-light text-[var(--color-clay)] leading-none">
+                {p.no}
+              </span>
+              <div>
+                <h3 class="font-display text-2xl md:text-3xl leading-tight text-[var(--color-ink)]">
+                  {p.title}
+                </h3>
+                <p class="lead mt-3 !text-base">
+                  {p.body}
+                </p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

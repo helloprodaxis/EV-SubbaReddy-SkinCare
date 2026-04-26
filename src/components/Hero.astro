@@ -1,0 +1,114 @@
+---
+import { site } from "~/data/site";
+---
+
+<section class="relative overflow-hidden">
+  {/* Soft radial wash + sage accents — gives the hero its skincare-counter feel. */}
+  <div
+    class="absolute inset-0 -z-10 pointer-events-none"
+    aria-hidden="true"
+    style="background:
+      radial-gradient(60% 80% at 18% 20%, color-mix(in oklab, var(--color-rose) 65%, transparent) 0%, transparent 70%),
+      radial-gradient(50% 60% at 90% 0%, color-mix(in oklab, var(--color-sage-soft) 45%, transparent) 0%, transparent 70%),
+      linear-gradient(180deg, var(--color-cream-warm), var(--color-cream));"
+  ></div>
+
+  <div class="container-edge pt-12 md:pt-20 pb-24 md:pb-32">
+    <div class="grid gap-12 lg:gap-16 lg:grid-cols-12 items-end">
+      <div class="lg:col-span-7 reveal">
+        <p class="eyebrow flex items-center gap-3">
+          <span class="inline-block w-8 h-px bg-[var(--color-clay-deep)]"></span>
+          Kadapa · Est. {site.established}
+        </p>
+        <h1 class="display-1 mt-6 max-w-[18ch]">
+          Skin you understand.
+          <br />
+          <span class="accent-italic">Care you can trust.</span>
+        </h1>
+        <p class="lead mt-8 max-w-xl">
+          Two decades of dermatology, three doctors, one principle — explain the diagnosis before
+          writing the prescription. Medical-grade dermatology, laser and cosmetology under
+          one roof.
+        </p>
+
+        <div class="flex flex-wrap gap-3 mt-10">
+          <a href="/book" class="btn btn-primary">
+            Book a Consultation
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="/treatments" class="btn btn-ghost">
+            Explore Treatments
+          </a>
+        </div>
+
+        <dl class="mt-14 grid grid-cols-3 gap-6 max-w-lg">
+          {[
+            { k: "20+", v: "Years in practice" },
+            { k: "3",   v: "Specialist doctors" },
+            { k: "10k+", v: "Patients treated" },
+          ].map((item) => (
+            <div>
+              <dt class="font-display text-3xl md:text-4xl font-light tracking-tight text-[var(--color-ink)]">
+                {item.k}
+              </dt>
+              <dd class="mt-1 text-xs uppercase tracking-[0.18em] text-[var(--color-ink-muted)]">
+                {item.v}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      {/* Right side — stacked editorial composition. Pure CSS gradients + SVG, no stock images required. */}
+      <div class="lg:col-span-5 relative reveal">
+        <div class="relative aspect-[4/5] w-full max-w-md mx-auto">
+          <div
+            class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_30px_80px_-20px_rgb(42_37_32/0.25)]"
+            style="background:
+              radial-gradient(120% 100% at 30% 20%, #f5d6c4 0%, #e0a98e 45%, #b87862 100%);"
+          >
+            {/* Subtle layered glow inside the frame */}
+            <div class="absolute inset-0 opacity-60"
+              style="background:
+                radial-gradient(60% 50% at 70% 80%, color-mix(in oklab, var(--color-gold) 70%, transparent), transparent 70%);"></div>
+
+            {/* Floating "label" tag */}
+            <div class="absolute top-6 left-6 right-6 flex items-center justify-between text-[var(--color-paper)]">
+              <span class="text-[0.7rem] uppercase tracking-[0.22em] opacity-90">Advanced</span>
+              <span class="text-[0.7rem] uppercase tracking-[0.22em] opacity-90">№ 01</span>
+            </div>
+
+            <div class="absolute bottom-8 left-8 right-8 text-[var(--color-paper)]">
+              <p class="font-display text-2xl md:text-3xl leading-tight">
+                Skin <span class="accent-italic !text-[var(--color-paper)]">&amp;</span> Laser
+              </p>
+              <p class="mt-2 text-xs uppercase tracking-[0.2em] opacity-80">
+                Centre · Kadapa
+              </p>
+            </div>
+          </div>
+
+          {/* Floating cream card — credentials moment */}
+          <div
+            class="absolute -bottom-10 -left-8 md:-left-16 w-56 md:w-64 p-5 rounded-2xl bg-[var(--color-paper)] shadow-[0_20px_50px_-12px_rgb(42_37_32/0.18)]"
+          >
+            <p class="eyebrow">Founder</p>
+            <p class="mt-2 font-display text-xl leading-tight text-[var(--color-ink)]">
+              Dr. E.V. Subba Reddy
+            </p>
+            <p class="text-xs text-[var(--color-ink-muted)] mt-1">
+              MD, DD · Ex-Registrar JIPMER
+            </p>
+          </div>
+
+          {/* Floating sage chip — service hint */}
+          <div
+            class="absolute -top-6 -right-4 md:-right-10 px-4 py-2 rounded-full bg-[var(--color-sage-deep)] text-[var(--color-cream)] text-[0.72rem] uppercase tracking-[0.18em] shadow-lg"
+          >
+            Open today
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

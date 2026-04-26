@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2e9da"/>
+      <stop offset="1" stop-color="#e8c5bc"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.85" cy="0.2" r="0.6">
+      <stop offset="0" stop-color="#c97b5c" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#c97b5c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <text x="80" y="180" font-family="Georgia, serif" font-size="32" fill="#a85f44" letter-spacing="6">EST. 1998 — KADAPA</text>
+  <text x="80" y="320" font-family="Georgia, serif" font-size="100" font-weight="300" fill="#2a2520" letter-spacing="-3">Dr. E.V. Subba Reddy</text>
+  <text x="80" y="420" font-family="Georgia, serif" font-style="italic" font-size="74" fill="#a85f44" letter-spacing="-1">Advanced Skin &amp; Laser Centre</text>
+  <line x1="80" y1="510" x2="280" y2="510" stroke="#2a2520" stroke-width="1"/>
+  <text x="80" y="555" font-family="Inter, Arial, sans-serif" font-size="22" fill="#4a3f35">Skin · Hair · Nail · Laser · Cosmetology</text>
+</svg>

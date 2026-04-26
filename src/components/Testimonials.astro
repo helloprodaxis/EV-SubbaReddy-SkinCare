@@ -1,0 +1,47 @@
+---
+import { testimonials } from "~/data/testimonials";
+---
+
+<section class="relative bg-[var(--color-ink)] text-[var(--color-cream)] overflow-hidden">
+  <div
+    class="absolute inset-0 -z-0 opacity-30 pointer-events-none"
+    aria-hidden="true"
+    style="background:
+      radial-gradient(40% 60% at 10% 10%, color-mix(in oklab, var(--color-clay) 60%, transparent), transparent 70%),
+      radial-gradient(40% 60% at 90% 90%, color-mix(in oklab, var(--color-sage) 50%, transparent), transparent 70%);"
+  ></div>
+
+  <div class="relative container-edge py-24 md:py-36">
+    <div class="max-w-2xl reveal">
+      <p class="eyebrow !text-[var(--color-clay-soft)]">From our patients</p>
+      <h2 class="display-2 mt-4 !text-[var(--color-cream)]">
+        Twenty years of <span class="accent-italic !text-[var(--color-clay-soft)]">word of mouth.</span>
+      </h2>
+    </div>
+
+    <div class="mt-16 grid gap-8 md:grid-cols-2">
+      {testimonials.map((t, i) => (
+        <figure
+          class="reveal p-8 md:p-10 rounded-2xl bg-[color-mix(in_oklab,var(--color-cream)_6%,transparent)] border border-[color-mix(in_oklab,var(--color-cream)_12%,transparent)] backdrop-blur-sm"
+          style={`transition-delay:${i * 80}ms`}
+        >
+          <div class="flex items-center gap-1 text-[var(--color-clay-soft)]" aria-label={`${t.rating} out of 5`}>
+            {Array.from({ length: t.rating }).map(() => (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2Z"/>
+              </svg>
+            ))}
+          </div>
+          <blockquote class="mt-5 font-display text-xl md:text-2xl leading-snug text-[var(--color-cream)]">
+            &ldquo;{t.quote}&rdquo;
+          </blockquote>
+          <figcaption class="mt-6 text-sm text-[color-mix(in_oklab,var(--color-cream)_70%,transparent)]">
+            <span class="font-medium text-[var(--color-cream)]">{t.name}</span>
+            <span class="mx-2 opacity-50">·</span>
+            <span>{t.treatment}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

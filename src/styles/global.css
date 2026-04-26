@@ -1,0 +1,254 @@
+@import "tailwindcss";
+
+/* ============================================================
+ * Design tokens — premium dermatology editorial aesthetic.
+ * Inspired by Augustinus Bader / Tata Harper / La Mer.
+ * Warm cream paper, clay-terracotta accents, sage botanicals.
+ * ============================================================ */
+@theme {
+  --font-display: "Fraunces", "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-italic: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+
+  --color-cream: #f7f1e8;
+  --color-cream-warm: #f2e9da;
+  --color-cream-deep: #ece0cd;
+  --color-paper: #fdfaf4;
+
+  --color-ink: #2a2520;
+  --color-ink-soft: #4a3f35;
+  --color-ink-muted: #7a6e60;
+
+  --color-clay: #c97b5c;
+  --color-clay-deep: #a85f44;
+  --color-clay-soft: #e8b9a3;
+
+  --color-sage: #7b8a6f;
+  --color-sage-deep: #5a6b50;
+  --color-sage-soft: #c4cdba;
+
+  --color-gold: #b8956a;
+  --color-gold-soft: #d4b896;
+
+  --color-rose: #e8c5bc;
+  --color-rose-deep: #c98e7f;
+
+  --shadow-soft: 0 1px 2px rgb(42 37 32 / 0.04), 0 8px 24px rgb(42 37 32 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(42 37 32 / 0.06), 0 24px 48px -12px rgb(42 37 32 / 0.18);
+}
+
+/* ============================================================
+ * Base
+ * ============================================================ */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  /* Subtle paper-grain texture overlay — adds tactile premium feel. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background-color: var(--color-clay);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-clay);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* ============================================================
+ * Components — small reusable bits expressed in pure CSS so any
+ * markup language (Astro/Svelte) can use them consistently.
+ * ============================================================ */
+@layer components {
+  .container-edge {
+    width: 100%;
+    max-width: 84rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-edge { padding-inline: 2.5rem; }
+  }
+  @media (min-width: 1280px) {
+    .container-edge { padding-inline: 4rem; }
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-clay-deep);
+  }
+
+  .display-1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.75rem, 6.5vw, 5.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+
+  .display-2 {
+    font-family: var(--font-display);
+    font-weight: 350;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .accent-italic {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-clay-deep);
+  }
+
+  .lead {
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.95rem 1.6rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                background-color 220ms ease,
+                color 220ms ease,
+                box-shadow 220ms ease;
+    will-change: transform;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-primary {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-clay-deep);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-ink);
+    border: 1px solid color-mix(in oklab, var(--color-ink) 18%, transparent);
+  }
+  .btn-ghost:hover {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    border-color: var(--color-ink);
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  .card {
+    background-color: var(--color-paper);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+    transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 320ms ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      color-mix(in oklab, var(--color-ink) 14%, transparent),
+      transparent
+    );
+  }
+
+  .marquee {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 38s linear infinite;
+    will-change: transform;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* Fade-up reveal — IntersectionObserver toggles `.is-in`. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 900ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.is-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+ * View Transitions — buttery cross-page morph (Astro built-in).
+ * ============================================================ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
