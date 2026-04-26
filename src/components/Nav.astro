@@ -1,5 +1,6 @@
 ---
 import { site } from "~/data/site";
+import Leaf from "./Leaf.astro";
 
 const links = [
   { href: "/",           label: "Home" },
@@ -16,22 +17,22 @@ const isActive = (href: string) =>
 
 <header
   id="site-nav"
-  class="sticky top-0 z-40 border-b border-[color-mix(in_oklab,var(--color-ink)_8%,transparent)] backdrop-blur-md bg-[color-mix(in_oklab,var(--color-cream)_82%,transparent)]"
+  class="sticky top-0 z-40 border-b border-[color-mix(in_oklab,var(--color-laurel)_8%,transparent)] backdrop-blur-md bg-[color-mix(in_oklab,var(--color-cashmere)_82%,transparent)]"
   transition:persist
 >
   <div class="container-edge flex items-center justify-between gap-6 py-4 md:py-5">
     <a href="/" class="flex items-center gap-3 group" aria-label={site.name}>
       <span
-        class="grid place-items-center w-10 h-10 rounded-full bg-[var(--color-ink)] text-[var(--color-paper)] font-display text-xl leading-none transition-transform group-hover:scale-105"
+        class="grid place-items-center w-10 h-10 bg-[var(--color-laurel)] text-[var(--color-cashmere-soft)] font-display text-xl font-light leading-none transition-transform group-hover:scale-105 blob-1"
         aria-hidden="true"
       >
         S
       </span>
       <span class="hidden sm:flex flex-col leading-tight">
-        <span class="font-display text-[1.05rem] tracking-tight text-[var(--color-ink)]">
+        <span class="font-display text-[1rem] font-light tracking-tight text-[var(--color-laurel)]">
           Dr. E.V. Subba Reddy
         </span>
-        <span class="text-[0.68rem] uppercase tracking-[0.18em] text-[var(--color-ink-muted)]">
+        <span class="text-[0.66rem] uppercase tracking-[0.22em] font-bold text-[var(--color-olive)]">
           Advanced Skin &amp; Laser Centre
         </span>
       </span>
@@ -42,16 +43,16 @@ const isActive = (href: string) =>
         <a
           href={link.href}
           class:list={[
-            "relative px-4 py-2 text-[0.86rem] font-medium tracking-wide transition-colors",
+            "relative px-4 py-2 text-[0.78rem] font-bold uppercase tracking-[0.16em] transition-colors",
             isActive(link.href)
-              ? "text-[var(--color-clay-deep)]"
-              : "text-[var(--color-ink-soft)] hover:text-[var(--color-ink)]",
+              ? "text-[var(--color-rose-deep)]"
+              : "text-[var(--color-ink-soft)] hover:text-[var(--color-laurel)]",
           ]}
         >
           {link.label}
           {isActive(link.href) && (
             <span
-              class="absolute left-4 right-4 -bottom-0.5 h-px bg-[var(--color-clay-deep)]"
+              class="absolute left-4 right-4 -bottom-0.5 h-px bg-[var(--color-rose-deep)]"
               aria-hidden="true"
             />
           )}
@@ -62,7 +63,7 @@ const isActive = (href: string) =>
     <div class="flex items-center gap-3">
       <a
         href={`tel:${site.phones[0].tel}`}
-        class="hidden md:inline-flex items-center gap-2 text-[0.85rem] text-[var(--color-ink-soft)] hover:text-[var(--color-ink)]"
+        class="hidden md:inline-flex items-center gap-2 text-[0.85rem] text-[var(--color-ink-soft)] hover:text-[var(--color-laurel)]"
         aria-label="Call clinic"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
@@ -70,13 +71,13 @@ const isActive = (href: string) =>
         </svg>
         {site.phones[0].number}
       </a>
-      <a href="/book" class="btn btn-primary !py-2.5 !px-4 text-[0.78rem]">
+      <a href="/book" class="btn btn-primary !py-2.5 !px-4 text-[0.72rem]">
         Book Visit
         <span class="arrow" aria-hidden="true">→</span>
       </a>
       <button
         id="nav-toggle"
-        class="lg:hidden grid place-items-center w-10 h-10 rounded-full border border-[color-mix(in_oklab,var(--color-ink)_15%,transparent)]"
+        class="lg:hidden grid place-items-center w-10 h-10 rounded-full border border-[color-mix(in_oklab,var(--color-laurel)_15%,transparent)]"
         aria-label="Open menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
@@ -90,16 +91,16 @@ const isActive = (href: string) =>
 
   <div
     id="mobile-menu"
-    class="lg:hidden hidden border-t border-[color-mix(in_oklab,var(--color-ink)_8%,transparent)] bg-[var(--color-cream)]"
+    class="lg:hidden hidden border-t border-[color-mix(in_oklab,var(--color-laurel)_8%,transparent)] bg-[var(--color-cashmere)]"
   >
     <nav class="container-edge flex flex-col py-3" aria-label="Mobile">
       {links.map((link) => (
         <a
           href={link.href}
           class:list={[
-            "py-3 text-base font-medium border-b border-[color-mix(in_oklab,var(--color-ink)_6%,transparent)] last:border-0",
+            "py-3 text-base font-medium border-b border-[color-mix(in_oklab,var(--color-laurel)_6%,transparent)] last:border-0",
             isActive(link.href)
-              ? "text-[var(--color-clay-deep)]"
+              ? "text-[var(--color-rose-deep)]"
               : "text-[var(--color-ink-soft)]",
           ]}
         >

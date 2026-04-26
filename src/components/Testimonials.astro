@@ -1,44 +1,62 @@
 ---
 import { testimonials } from "~/data/testimonials";
+import Leaf from "./Leaf.astro";
 ---
 
-<section class="relative bg-[var(--color-ink)] text-[var(--color-cream)] overflow-hidden">
-  <div
-    class="absolute inset-0 -z-0 opacity-30 pointer-events-none"
-    aria-hidden="true"
-    style="background:
-      radial-gradient(40% 60% at 10% 10%, color-mix(in oklab, var(--color-clay) 60%, transparent), transparent 70%),
-      radial-gradient(40% 60% at 90% 90%, color-mix(in oklab, var(--color-sage) 50%, transparent), transparent 70%);"
-  ></div>
+{/*
+ * Testimonials — single hero quote on a deep laurel canvas with organic
+ * floating shapes. Other quotes sit as small cards underneath. Different
+ * from the typical 2-up grid we've used elsewhere.
+ */}
+<section class="relative bg-[var(--color-laurel)] text-[var(--color-cashmere-soft)] overflow-hidden">
+  <div class="absolute -top-12 -left-20 pointer-events-none opacity-40" aria-hidden="true">
+    <div class="w-[420px] h-[420px] blob-2" style="background:radial-gradient(circle, var(--color-mauve), transparent 65%);"></div>
+  </div>
+  <div class="absolute -bottom-20 -right-12 pointer-events-none opacity-50" aria-hidden="true">
+    <div class="w-[520px] h-[520px] blob-3" style="background:radial-gradient(circle, var(--color-olive-deep), transparent 60%);"></div>
+  </div>
 
   <div class="relative container-edge py-24 md:py-36">
     <div class="max-w-2xl reveal">
-      <p class="eyebrow !text-[var(--color-clay-soft)]">From our patients</p>
-      <h2 class="display-2 mt-4 !text-[var(--color-cream)]">
-        Twenty years of <span class="accent-italic !text-[var(--color-clay-soft)]">word of mouth.</span>
+      <p class="eyebrow !text-[var(--color-rose-soft)]">04 · From our patients</p>
+      <h2 class="display-2 mt-4 !text-[var(--color-cashmere-soft)]">
+        Twenty years of <span class="accent-italic !text-[var(--color-rose)]">word of mouth.</span>
       </h2>
     </div>
 
-    <div class="mt-16 grid gap-8 md:grid-cols-2">
-      {testimonials.map((t, i) => (
+    {/* Hero quote */}
+    <figure class="reveal mt-16 max-w-4xl">
+      <Leaf size={48} color="var(--color-rose)" rotation={-15} opacity={0.85} />
+      <blockquote class="mt-6 font-display font-extralight text-3xl md:text-5xl leading-[1.15] tracking-tight !text-[var(--color-cashmere-soft)]">
+        &ldquo;{testimonials[0].quote}&rdquo;
+      </blockquote>
+      <figcaption class="mt-8 flex items-center gap-4 text-sm">
+        <span class="w-10 h-px bg-[var(--color-rose)]"></span>
+        <span class="font-bold">{testimonials[0].name}</span>
+        <span class="opacity-50">·</span>
+        <span class="opacity-80">{testimonials[0].treatment}</span>
+      </figcaption>
+    </figure>
+
+    {/* Smaller follow-up quotes */}
+    <div class="mt-16 grid gap-5 md:grid-cols-3">
+      {testimonials.slice(1).map((t, i) => (
         <figure
-          class="reveal p-8 md:p-10 rounded-2xl bg-[color-mix(in_oklab,var(--color-cream)_6%,transparent)] border border-[color-mix(in_oklab,var(--color-cream)_12%,transparent)] backdrop-blur-sm"
+          class="reveal glass !bg-[color-mix(in_oklab,var(--color-cashmere)_8%,transparent)] !border-[color-mix(in_oklab,var(--color-cashmere)_18%,transparent)] p-7"
           style={`transition-delay:${i * 80}ms`}
         >
-          <div class="flex items-center gap-1 text-[var(--color-clay-soft)]" aria-label={`${t.rating} out of 5`}>
+          <div class="flex items-center gap-1 text-[var(--color-rose)]" aria-label={`${t.rating} out of 5`}>
             {Array.from({ length: t.rating }).map(() => (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2Z"/>
               </svg>
             ))}
           </div>
-          <blockquote class="mt-5 font-display text-xl md:text-2xl leading-snug text-[var(--color-cream)]">
+          <blockquote class="mt-4 text-base leading-relaxed !text-[var(--color-cashmere-soft)]">
             &ldquo;{t.quote}&rdquo;
           </blockquote>
-          <figcaption class="mt-6 text-sm text-[color-mix(in_oklab,var(--color-cream)_70%,transparent)]">
-            <span class="font-medium text-[var(--color-cream)]">{t.name}</span>
-            <span class="mx-2 opacity-50">·</span>
-            <span>{t.treatment}</span>
+          <figcaption class="mt-5 text-xs uppercase tracking-[0.18em] font-bold text-[var(--color-rose-soft)]">
+            {t.name} <span class="opacity-50">·</span> {t.treatment}
           </figcaption>
         </figure>
       ))}

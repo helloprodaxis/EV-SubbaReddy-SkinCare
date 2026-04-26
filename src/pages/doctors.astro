@@ -1,13 +1,14 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import PageHeader from "~/components/PageHeader.astro";
+import Leaf from "~/components/Leaf.astro";
 import { doctors } from "~/data/doctors";
 import { site } from "~/data/site";
 
 const palette = [
-  { from: "#c97b5c", to: "#a85f44" },
-  { from: "#7b8a6f", to: "#5a6b50" },
-  { from: "#b8956a", to: "#8a6e4e" },
+  { bg: "var(--color-sage)",   ink: "var(--color-laurel-deep)", accent: "var(--color-laurel)" },
+  { bg: "var(--color-rose)",   ink: "var(--color-laurel-deep)", accent: "var(--color-mauve)" },
+  { bg: "var(--color-laurel)", ink: "var(--color-cashmere-soft)", accent: "var(--color-rose)" },
 ];
 ---
 
@@ -23,55 +24,61 @@ const palette = [
   />
 
   <section class="container-edge py-16 md:py-24 space-y-32">
-    {doctors.map((d, i) => (
-      <article
-        id={d.slug}
-        class="grid gap-12 lg:grid-cols-12 items-center scroll-mt-24"
-        class:list={i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}
-      >
-        <div class="lg:col-span-5 reveal">
-          <div
-            class="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-[0_30px_80px_-20px_rgb(42_37_32/0.25)]"
-            style={`background: linear-gradient(160deg, ${palette[i].from}, ${palette[i].to});`}
-          >
-            <div class="absolute inset-0 grid place-items-center">
-              <span class="font-display text-[10rem] font-light text-[var(--color-paper)]/85 leading-none tracking-tighter">
-                {d.name.split(" ").slice(1).map((s) => s[0]).join("")}
-              </span>
-            </div>
-            <div class="absolute top-6 left-6 right-6 flex justify-between text-[0.72rem] uppercase tracking-[0.2em] text-[var(--color-paper)]/85">
-              <span>0{i + 1} / 0{doctors.length}</span>
-              <span>{d.qualifications}</span>
-            </div>
-            <div class="absolute bottom-6 left-6 right-6 text-[var(--color-paper)]">
-              <p class="text-[0.72rem] uppercase tracking-[0.2em] opacity-80">{d.role}</p>
+    {doctors.map((d, i) => {
+      const c = palette[i];
+      return (
+        <article
+          id={d.slug}
+          class="grid gap-12 lg:grid-cols-12 items-center scroll-mt-24"
+          class:list={i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}
+        >
+          <div class="lg:col-span-5 reveal">
+            <div
+              class="relative aspect-[4/5] blob-1 overflow-hidden shadow-[0_30px_80px_-20px_rgb(45_54_43/0.25)] transition-all duration-700 hover:[border-radius:var(--r-organic-2)]"
+              style={`background:${c.bg}; color:${c.ink};`}
+            >
+              <div class="absolute inset-0 grid place-items-center">
+                <span class="font-display text-[10rem] font-extralight opacity-80 leading-none tracking-tighter">
+                  {d.name.split(" ").slice(1).map((s) => s[0]).join("")}
+                </span>
+              </div>
+              <div class="absolute top-8 left-8 right-8 flex justify-between text-[0.72rem] uppercase tracking-[0.22em] font-bold opacity-75">
+                <span>0{i + 1} / 0{doctors.length}</span>
+                <span>{d.qualifications}</span>
+              </div>
+              <div class="absolute top-1/3 right-8 opacity-60">
+                <Leaf size={50} color={c.accent} rotation={i * 30} opacity={0.7} />
+              </div>
+              <div class="absolute bottom-8 left-8 right-8">
+                <p class="text-[0.72rem] uppercase tracking-[0.22em] font-bold opacity-80">{d.role}</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="lg:col-span-7 reveal">
-          <p class="eyebrow">Dr. 0{i + 1}</p>
-          <h2 class="display-2 mt-3">{d.name}</h2>
-          <p class="text-sm text-[var(--color-ink-muted)] mt-2 uppercase tracking-[0.16em]">
-            {d.specialties.join(" · ")}
-          </p>
-          <p class="lead mt-6 max-w-xl">{d.bio}</p>
+          <div class="lg:col-span-7 reveal">
+            <p class="eyebrow">Dr. 0{i + 1}</p>
+            <h2 class="display-2 mt-3">{d.name}</h2>
+            <p class="text-[0.7rem] text-[var(--color-olive)] mt-2 uppercase tracking-[0.22em] font-bold">
+              {d.specialties.join(" · ")}
+            </p>
+            <p class="lead mt-6 max-w-xl">{d.bio}</p>
 
-          <ul class="mt-8 space-y-3">
-            {d.highlights.map((h) => (
-              <li class="flex items-start gap-3 text-[var(--color-ink-soft)]">
-                <span class="mt-2 inline-block w-3 h-px bg-[var(--color-clay)] shrink-0"></span>
-                <span>{h}</span>
-              </li>
-            ))}
-          </ul>
+            <ul class="mt-8 space-y-3">
+              {d.highlights.map((h) => (
+                <li class="flex items-start gap-3 text-[var(--color-ink-soft)]">
+                  <span class="mt-2 inline-block w-3 h-px bg-[var(--color-rose-deep)] shrink-0"></span>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
 
-          <a href="/book" class="btn btn-ghost mt-10">
-            Book with {d.name.split(" ")[1]}
-            <span class="arrow" aria-hidden="true">→</span>
-          </a>
-        </div>
-      </article>
-    ))}
+            <a href="/book" class="btn btn-ghost mt-10">
+              Book with {d.name.split(" ")[1]}
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+      );
+    })}
   </section>
 </BaseLayout>

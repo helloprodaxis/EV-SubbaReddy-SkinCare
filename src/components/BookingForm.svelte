@@ -26,7 +26,6 @@
     status !== "submitting",
   );
 
-  // Min date = today (local).
   const today = new Date().toISOString().split("T")[0];
 
   async function submit(e: SubmitEvent) {
@@ -62,14 +61,14 @@
 <form on:submit={submit} class="space-y-7" novalidate>
   {#if status === "success"}
     <div
-      class="rounded-2xl border border-[color-mix(in_oklab,var(--color-sage-deep)_30%,transparent)] bg-[color-mix(in_oklab,var(--color-sage-soft)_25%,transparent)] p-8"
+      class="rounded-[var(--r-soft)] border border-[color-mix(in_oklab,var(--color-sage)_60%,transparent)] bg-[var(--color-sage-mist)] p-8"
       role="status"
       aria-live="polite"
     >
-      <p class="font-display text-2xl text-[var(--color-sage-deep)]">Request received.</p>
+      <p class="font-display text-2xl font-light text-[var(--color-laurel)]">Request received.</p>
       <p class="mt-3 text-[var(--color-ink-soft)]">
         Our reception will call you on <strong>{phone}</strong> shortly to confirm your slot.
-        For anything urgent, please call <a class="underline" href="tel:+919985845089">+91 99858 45089</a>.
+        For anything urgent, please call <a class="underline text-[var(--color-rose-deep)]" href="tel:+919985845089">+91 99858 45089</a>.
       </p>
     </div>
   {:else}
@@ -98,7 +97,7 @@
           aria-invalid={phone.length > 0 && !phoneOk}
         />
         {#if phone.length > 0 && !phoneOk}
-          <span class="text-xs text-[var(--color-clay-deep)] mt-1 block">Enter a valid phone number.</span>
+          <span class="text-xs text-[var(--color-rose-deep)] mt-1 block">Enter a valid phone number.</span>
         {/if}
       </label>
     </div>
@@ -153,10 +152,10 @@
       <div class="grid grid-cols-2 gap-3">
         {#each [{ id: "morning", label: "Morning", time: "9:30 – 1:30" }, { id: "evening", label: "Evening", time: "5:00 – 8:00" }] as slot}
           <label
-            class="cursor-pointer rounded-2xl border p-5 transition-all"
-            class:border-[var(--color-clay-deep)]={preferredSlot === slot.id}
-            class:bg-[var(--color-cream-warm)]={preferredSlot === slot.id}
-            class:border-[color-mix(in_oklab,var(--color-ink)_15%,transparent)]={preferredSlot !== slot.id}
+            class="cursor-pointer rounded-[var(--r-soft)] border p-5 transition-all"
+            class:border-[var(--color-rose-deep)]={preferredSlot === slot.id}
+            class:bg-[var(--color-sage-mist)]={preferredSlot === slot.id}
+            class:border-[color-mix(in_oklab,var(--color-laurel)_15%,transparent)]={preferredSlot !== slot.id}
           >
             <input
               type="radio"
@@ -165,8 +164,8 @@
               bind:group={preferredSlot}
               class="sr-only"
             />
-            <span class="font-display text-xl block">{slot.label}</span>
-            <span class="text-xs uppercase tracking-[0.16em] text-[var(--color-ink-muted)] mt-1 block">
+            <span class="font-display text-xl font-light block">{slot.label}</span>
+            <span class="text-xs uppercase tracking-[0.18em] font-bold text-[var(--color-olive)] mt-1 block">
               {slot.time}
             </span>
           </label>
@@ -185,7 +184,7 @@
     </label>
 
     <label class="flex items-start gap-3 text-sm text-[var(--color-ink-soft)]">
-      <input type="checkbox" bind:checked={consent} class="mt-1 accent-[var(--color-clay-deep)]" />
+      <input type="checkbox" bind:checked={consent} class="mt-1 accent-[var(--color-rose-deep)]" />
       <span>
         I consent to being contacted by the clinic on the number provided to confirm my appointment.
       </span>
@@ -193,7 +192,7 @@
 
     {#if status === "error"}
       <div
-        class="rounded-xl border border-[var(--color-clay-deep)] bg-[color-mix(in_oklab,var(--color-rose)_50%,transparent)] p-4 text-sm text-[var(--color-clay-deep)]"
+        class="rounded-xl border border-[var(--color-rose-deep)] bg-[color-mix(in_oklab,var(--color-rose-soft)_60%,transparent)] p-4 text-sm text-[var(--color-mauve)]"
         role="alert"
       >
         {errorMessage || "Something went wrong. Please try again or call us directly."}
@@ -217,25 +216,24 @@
 </form>
 
 <style>
-  /* Scoped to the form so we don't pollute the rest of the site. */
   .form-field {
     width: 100%;
-    background-color: var(--color-paper);
-    border: 1px solid color-mix(in oklab, var(--color-ink) 14%, transparent);
+    background-color: var(--color-white);
+    border: 1px solid color-mix(in oklab, var(--color-laurel) 14%, transparent);
     border-radius: 0.875rem;
     padding: 0.95rem 1.1rem;
     font-family: var(--font-body);
     font-size: 0.95rem;
-    color: var(--color-ink);
+    color: var(--color-laurel);
     transition: border-color 180ms ease, box-shadow 180ms ease;
   }
   .form-field::placeholder { color: var(--color-ink-muted); }
   .form-field:focus {
     outline: none;
-    border-color: var(--color-clay-deep);
-    box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-clay) 22%, transparent);
+    border-color: var(--color-rose-deep);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-rose) 30%, transparent);
   }
   .form-field[aria-invalid="true"] {
-    border-color: var(--color-clay-deep);
+    border-color: var(--color-rose-deep);
   }
 </style>

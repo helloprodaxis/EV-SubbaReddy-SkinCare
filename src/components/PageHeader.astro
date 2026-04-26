@@ -1,4 +1,6 @@
 ---
+import Leaf from "./Leaf.astro";
+
 interface Props {
   eyebrow: string;
   title: string;
@@ -13,14 +15,18 @@ const { eyebrow, title, italic, subtitle } = Astro.props;
     class="absolute inset-0 -z-10 pointer-events-none"
     aria-hidden="true"
     style="background:
-      radial-gradient(45% 50% at 12% 0%, color-mix(in oklab, var(--color-rose) 55%, transparent), transparent 70%),
-      radial-gradient(40% 50% at 90% 30%, color-mix(in oklab, var(--color-sage-soft) 45%, transparent), transparent 70%),
-      linear-gradient(180deg, var(--color-cream-warm) 0%, var(--color-cream) 100%);"
+      radial-gradient(45% 55% at 12% 0%, color-mix(in oklab, var(--color-rose-soft) 60%, transparent), transparent 70%),
+      radial-gradient(40% 50% at 90% 30%, color-mix(in oklab, var(--color-sage) 50%, transparent), transparent 70%),
+      var(--color-cashmere);"
   ></div>
 
-  <div class="container-edge pt-16 md:pt-24 pb-16 md:pb-20">
+  <div class="absolute top-10 right-6 md:right-16 pointer-events-none opacity-50" aria-hidden="true">
+    <Leaf size={120} color="var(--color-olive)" rotation={20} opacity={0.45} />
+  </div>
+
+  <div class="container-edge pt-16 md:pt-24 pb-16 md:pb-20 relative">
     <p class="eyebrow flex items-center gap-3 reveal">
-      <span class="inline-block w-8 h-px bg-[var(--color-clay-deep)]"></span>
+      <span class="inline-block w-8 h-px bg-[var(--color-rose-deep)]"></span>
       {eyebrow}
     </p>
     <h1 class="display-1 mt-5 max-w-[16ch] reveal">

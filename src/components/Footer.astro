@@ -1,34 +1,39 @@
 ---
 import { site } from "~/data/site";
+import Leaf from "./Leaf.astro";
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="relative z-10 mt-32 bg-[var(--color-ink)] text-[var(--color-cream)]">
-  <div class="container-edge py-20">
+<footer class="relative z-10 mt-24 bg-[var(--color-laurel)] text-[var(--color-cashmere-soft)] overflow-hidden">
+  <div class="absolute -top-24 -right-24 opacity-40 pointer-events-none" aria-hidden="true">
+    <Leaf size={260} color="var(--color-sage)" rotation={25} opacity={0.5} />
+  </div>
+
+  <div class="container-edge py-20 md:py-24 relative">
     <div class="grid gap-14 md:grid-cols-12">
       <div class="md:col-span-5">
-        <p class="eyebrow !text-[var(--color-clay-soft)]">Visit us</p>
-        <h2 class="display-2 mt-4 !text-[var(--color-cream)]">
-          Care that <span class="accent-italic !text-[var(--color-clay-soft)]">listens.</span>
+        <p class="eyebrow !text-[var(--color-rose-soft)]">Visit us</p>
+        <h2 class="display-2 mt-4 !text-[var(--color-cashmere-soft)]">
+          Care that <span class="accent-italic !text-[var(--color-rose)]">listens.</span>
         </h2>
-        <p class="lead mt-6 !text-[color-mix(in_oklab,var(--color-cream)_82%,transparent)] max-w-md">
+        <p class="lead mt-6 !text-[color-mix(in_oklab,var(--color-cashmere-soft)_82%,transparent)] max-w-md">
           We believe a good dermatologist explains before they prescribe. Walk in for a consult — or call ahead for a confirmed slot.
         </p>
         <div class="flex flex-wrap gap-3 mt-8">
-          <a href="/book" class="btn btn-primary !bg-[var(--color-clay)] !text-[var(--color-ink)] hover:!bg-[var(--color-clay-soft)]">
+          <a href="/book" class="btn btn-rose">
             Book Appointment
             <span class="arrow" aria-hidden="true">→</span>
           </a>
-          <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`} class="btn btn-ghost !border-[color-mix(in_oklab,var(--color-cream)_25%,transparent)] !text-[var(--color-cream)]">
+          <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`} class="btn btn-ghost !border-[color-mix(in_oklab,var(--color-cashmere-soft)_25%,transparent)] !text-[var(--color-cashmere-soft)]">
             WhatsApp
           </a>
         </div>
       </div>
 
       <div class="md:col-span-3">
-        <p class="eyebrow !text-[var(--color-clay-soft)]">Address</p>
-        <address class="not-italic mt-4 text-sm leading-relaxed text-[color-mix(in_oklab,var(--color-cream)_78%,transparent)]">
+        <p class="eyebrow !text-[var(--color-rose-soft)]">Address</p>
+        <address class="not-italic mt-4 text-sm leading-relaxed text-[color-mix(in_oklab,var(--color-cashmere-soft)_78%,transparent)]">
           {site.address.line1}<br />
           {site.address.line2}<br />
           {site.address.area}, {site.address.city}<br />
@@ -37,29 +42,29 @@ const year = new Date().getFullYear();
       </div>
 
       <div class="md:col-span-2">
-        <p class="eyebrow !text-[var(--color-clay-soft)]">Contact</p>
-        <ul class="mt-4 space-y-2 text-sm text-[color-mix(in_oklab,var(--color-cream)_78%,transparent)]">
+        <p class="eyebrow !text-[var(--color-rose-soft)]">Contact</p>
+        <ul class="mt-4 space-y-2 text-sm text-[color-mix(in_oklab,var(--color-cashmere-soft)_78%,transparent)]">
           {site.phones.map((p) => (
-            <li><a href={`tel:${p.tel}`} class="hover:text-[var(--color-clay-soft)]">{p.number}</a></li>
+            <li><a href={`tel:${p.tel}`} class="hover:text-[var(--color-rose)]">{p.number}</a></li>
           ))}
-          <li><a href={`mailto:${site.email}`} class="hover:text-[var(--color-clay-soft)] break-all">{site.email}</a></li>
+          <li><a href={`mailto:${site.email}`} class="hover:text-[var(--color-rose)] break-all">{site.email}</a></li>
         </ul>
       </div>
 
       <div class="md:col-span-2">
-        <p class="eyebrow !text-[var(--color-clay-soft)]">Hours</p>
-        <ul class="mt-4 space-y-2 text-sm text-[color-mix(in_oklab,var(--color-cream)_78%,transparent)]">
+        <p class="eyebrow !text-[var(--color-rose-soft)]">Hours</p>
+        <ul class="mt-4 space-y-2 text-sm text-[color-mix(in_oklab,var(--color-cashmere-soft)_78%,transparent)]">
           <li>Mon–Sat<br />{site.hours.weekdays.morning}<br />{site.hours.weekdays.evening}</li>
-          <li class="text-[var(--color-clay-soft)]">Sunday — {site.hours.sunday}</li>
+          <li class="text-[var(--color-rose)]">Sunday — {site.hours.sunday}</li>
         </ul>
       </div>
     </div>
 
-    <div class="mt-16 pt-8 border-t border-[color-mix(in_oklab,var(--color-cream)_12%,transparent)] flex flex-col md:flex-row gap-4 items-start md:items-center justify-between text-xs text-[color-mix(in_oklab,var(--color-cream)_55%,transparent)]">
-      <p>© {year} {site.name}. Established {site.established}. All rights reserved.</p>
+    <div class="mt-16 pt-8 border-t border-[color-mix(in_oklab,var(--color-cashmere-soft)_15%,transparent)] flex flex-col md:flex-row gap-4 items-start md:items-center justify-between text-xs text-[color-mix(in_oklab,var(--color-cashmere-soft)_55%,transparent)]">
+      <p>© {year} {site.name}. Established {site.established}.</p>
       <p class="flex items-center gap-2">
         Crafted by
-        <a href="https://prodaxis.in" class="underline underline-offset-4 hover:text-[var(--color-clay-soft)]">
+        <a href="https://prodaxis.in" class="underline underline-offset-4 hover:text-[var(--color-rose)]">
           Prodaxis
         </a>
       </p>

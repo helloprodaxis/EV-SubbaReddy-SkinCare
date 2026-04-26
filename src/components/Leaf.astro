@@ -1,0 +1,46 @@
+---
+/**
+ * Botanical leaf SVG — used as a decorative anchor across the site.
+ * It's the recurring brand motif that ties pages together.
+ */
+interface Props {
+  size?: number;
+  color?: string;
+  rotation?: number;
+  opacity?: number;
+  class?: string;
+}
+const { size = 48, color = "var(--color-olive)", rotation = 0, opacity = 1, class: className = "" } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 48 48"
+  fill="none"
+  class={className}
+  style={`color:${color}; opacity:${opacity}; transform:rotate(${rotation}deg);`}
+  aria-hidden="true"
+>
+  <path
+    d="M24 4 C 14 8, 8 16, 8 26 C 8 36, 16 44, 24 44 C 32 44, 40 36, 40 26 C 40 16, 34 8, 24 4 Z"
+    fill="currentColor"
+    opacity="0.18"
+  />
+  <path
+    d="M24 4 C 18 16, 16 28, 24 44"
+    stroke="currentColor"
+    stroke-width="1"
+    stroke-linecap="round"
+    fill="none"
+    opacity="0.6"
+  />
+  <path
+    d="M24 12 C 20 14, 18 18, 18 22 M 24 18 C 28 20, 30 22, 30 26 M 24 26 C 20 28, 18 32, 18 36"
+    stroke="currentColor"
+    stroke-width="0.7"
+    stroke-linecap="round"
+    fill="none"
+    opacity="0.5"
+  />
+</svg>

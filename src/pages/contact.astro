@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import PageHeader from "~/components/PageHeader.astro";
+import Leaf from "~/components/Leaf.astro";
 import { site } from "~/data/site";
 
 const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address.mapsQuery)}`;
@@ -23,7 +24,7 @@ const mapsEmbed = `https://www.google.com/maps?q=${encodeURIComponent(site.addre
       <div class="lg:col-span-5 space-y-10">
         <div class="reveal">
           <p class="eyebrow">Address</p>
-          <address class="not-italic mt-3 font-display text-2xl md:text-3xl leading-tight text-[var(--color-ink)]">
+          <address class="not-italic mt-3 font-display text-2xl md:text-3xl font-light leading-tight text-[var(--color-laurel)]">
             {site.address.line1}<br />
             <span class="text-[var(--color-ink-soft)]">{site.address.line2}</span><br />
             <span class="text-[var(--color-ink-soft)]">{site.address.area}, {site.address.city}</span><br />
@@ -41,9 +42,9 @@ const mapsEmbed = `https://www.google.com/maps?q=${encodeURIComponent(site.addre
           <p class="eyebrow">Phone</p>
           <ul class="mt-3 space-y-3">
             {site.phones.map((p) => (
-              <li class="flex items-center justify-between gap-4 py-2 border-b border-[color-mix(in_oklab,var(--color-ink)_8%,transparent)]">
-                <span class="text-sm uppercase tracking-[0.16em] text-[var(--color-ink-muted)]">{p.label}</span>
-                <a href={`tel:${p.tel}`} class="font-display text-2xl text-[var(--color-ink)] hover:text-[var(--color-clay-deep)]">
+              <li class="flex items-center justify-between gap-4 py-2 border-b border-[color-mix(in_oklab,var(--color-laurel)_8%,transparent)]">
+                <span class="text-[0.7rem] uppercase tracking-[0.22em] font-bold text-[var(--color-olive)]">{p.label}</span>
+                <a href={`tel:${p.tel}`} class="font-display text-2xl font-light text-[var(--color-laurel)] hover:text-[var(--color-rose-deep)]">
                   {p.number}
                 </a>
               </li>
@@ -55,24 +56,27 @@ const mapsEmbed = `https://www.google.com/maps?q=${encodeURIComponent(site.addre
           <p class="eyebrow">Hours</p>
           <dl class="mt-3 grid grid-cols-2 gap-y-3 gap-x-6 text-[var(--color-ink-soft)]">
             <dt class="text-sm">Mon – Sat (Morning)</dt>
-            <dd class="font-display text-lg text-[var(--color-ink)]">{site.hours.weekdays.morning}</dd>
+            <dd class="font-display text-lg font-light text-[var(--color-laurel)]">{site.hours.weekdays.morning}</dd>
             <dt class="text-sm">Mon – Sat (Evening)</dt>
-            <dd class="font-display text-lg text-[var(--color-ink)]">{site.hours.weekdays.evening}</dd>
+            <dd class="font-display text-lg font-light text-[var(--color-laurel)]">{site.hours.weekdays.evening}</dd>
             <dt class="text-sm">Sunday</dt>
-            <dd class="font-display text-lg text-[var(--color-clay-deep)]">{site.hours.sunday}</dd>
+            <dd class="font-display text-lg font-light text-[var(--color-rose-deep)]">{site.hours.sunday}</dd>
           </dl>
         </div>
 
         <div class="reveal">
           <p class="eyebrow">Email</p>
-          <a href={`mailto:${site.email}`} class="mt-3 inline-block font-display text-xl text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] break-all">
+          <a href={`mailto:${site.email}`} class="mt-3 inline-block font-display text-xl font-light text-[var(--color-laurel)] hover:text-[var(--color-rose-deep)] break-all">
             {site.email}
           </a>
         </div>
       </div>
 
       <div class="lg:col-span-7 reveal">
-        <div class="rounded-2xl overflow-hidden shadow-[0_30px_80px_-20px_rgb(42_37_32/0.25)] bg-[var(--color-cream-deep)] aspect-[4/5] lg:aspect-[3/4]">
+        <div class="relative rounded-[var(--r-soft-lg)] overflow-hidden shadow-[0_30px_80px_-20px_rgb(45_54_43/0.25)] bg-[var(--color-cashmere-deep)] aspect-[4/5] lg:aspect-[3/4]">
+          <div class="absolute top-4 right-4 z-10 pointer-events-none">
+            <Leaf size={60} color="var(--color-laurel)" rotation={20} opacity={0.5} />
+          </div>
           <iframe
             src={mapsEmbed}
             title={`Map showing ${site.name}`}

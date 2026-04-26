@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import PageHeader from "~/components/PageHeader.astro";
+import Leaf from "~/components/Leaf.astro";
 import { treatments, treatmentCategories } from "~/data/treatments";
 import { site } from "~/data/site";
 
@@ -29,28 +30,31 @@ const grouped = categoryOrder.map((cat) => ({
     {grouped.map((group, gi) => (
       <div class="mt-16 first:mt-0">
         <div class="flex items-baseline justify-between gap-4 reveal">
-          <h2 class="display-2 !text-[2rem] md:!text-[2.5rem]">{group.label}</h2>
-          <span class="text-xs uppercase tracking-[0.2em] text-[var(--color-ink-muted)]">
+          <div class="flex items-center gap-4">
+            <Leaf size={32} color="var(--color-olive)" rotation={gi * 25} opacity={0.7} />
+            <h2 class="display-2 !text-[2rem] md:!text-[2.5rem]">{group.label}</h2>
+          </div>
+          <span class="text-[0.7rem] uppercase tracking-[0.22em] font-bold text-[var(--color-olive)]">
             0{gi + 1} / 0{grouped.length}
           </span>
         </div>
         <div class="hairline mt-6"></div>
 
-        <ul class="mt-10 grid gap-px bg-[color-mix(in_oklab,var(--color-ink)_8%,transparent)] rounded-2xl overflow-hidden">
+        <ul class="mt-10 grid gap-px bg-[color-mix(in_oklab,var(--color-laurel)_8%,transparent)] rounded-[var(--r-soft)] overflow-hidden">
           {group.items.map((t, i) => (
             <li
               id={t.slug}
-              class="reveal bg-[var(--color-paper)] p-8 md:p-10 grid md:grid-cols-12 gap-6 items-start hover:bg-[var(--color-cream-warm)] transition-colors scroll-mt-24"
+              class="reveal bg-[var(--color-white)] p-8 md:p-10 grid md:grid-cols-12 gap-6 items-start hover:bg-[var(--color-sage-mist)] transition-colors scroll-mt-24"
               style={`transition-delay:${i * 50}ms`}
             >
-              <div class="md:col-span-1 text-[var(--color-clay)] font-display text-2xl">
+              <div class="md:col-span-1 text-[var(--color-rose-deep)] font-display text-2xl font-extralight">
                 {String(i + 1).padStart(2, "0")}
               </div>
               <div class="md:col-span-5">
-                <h3 class="font-display text-2xl md:text-3xl text-[var(--color-ink)] leading-tight">
+                <h3 class="font-display text-2xl md:text-3xl font-light text-[var(--color-laurel)] leading-tight">
                   {t.title}
                 </h3>
-                <p class="mt-2 text-xs uppercase tracking-[0.18em] text-[var(--color-ink-muted)]">
+                <p class="mt-2 text-[0.7rem] uppercase tracking-[0.22em] font-bold text-[var(--color-olive)]">
                   {t.duration}
                 </p>
               </div>
@@ -58,7 +62,7 @@ const grouped = categoryOrder.map((cat) => ({
                 <p class="text-[var(--color-ink-soft)] leading-relaxed">{t.blurb}</p>
                 <ul class="mt-4 flex flex-wrap gap-2">
                   {t.conditions.map((c) => (
-                    <li class="text-[0.72rem] uppercase tracking-[0.14em] text-[var(--color-ink-muted)] px-3 py-1 rounded-full bg-[var(--color-cream-deep)]">
+                    <li class="text-[0.72rem] uppercase tracking-[0.16em] font-bold text-[var(--color-olive-deep)] px-3 py-1 rounded-full bg-[var(--color-sage-mist)]">
                       {c}
                     </li>
                   ))}
@@ -72,12 +76,13 @@ const grouped = categoryOrder.map((cat) => ({
   </section>
 
   <section class="container-edge pb-24 md:pb-32">
-    <div class="card !p-12 text-center max-w-3xl mx-auto reveal">
-      <p class="eyebrow">Not sure what you need?</p>
-      <h2 class="display-2 mt-4">
-        Start with a <span class="accent-italic">consultation.</span>
+    <div class="tile tile-sage !p-12 text-center max-w-3xl mx-auto reveal">
+      <Leaf size={40} color="var(--color-laurel)" rotation={-15} opacity={0.7} class="mx-auto" />
+      <p class="eyebrow !text-[var(--color-laurel-deep)]/70 mt-3">Not sure what you need?</p>
+      <h2 class="display-2 mt-4 !text-[var(--color-laurel-deep)]">
+        Start with a <span class="accent-italic !text-[var(--color-mauve)]">consultation.</span>
       </h2>
-      <p class="lead mt-4 max-w-xl mx-auto">
+      <p class="lead mt-4 max-w-xl mx-auto !text-[var(--color-laurel-deep)]/80">
         Most patients arrive with a guess and leave with a plan. A 15-minute consult is
         all it usually takes to get clarity on what's going on with your skin.
       </p>

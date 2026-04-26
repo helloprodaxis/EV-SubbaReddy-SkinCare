@@ -19,7 +19,7 @@ import { site } from "~/data/site";
   <section class="container-edge py-16 md:py-24">
     <div class="grid gap-12 lg:grid-cols-12 items-start">
       <div class="lg:col-span-7 reveal">
-        <div class="card !p-8 md:!p-12">
+        <div class="tile !p-8 md:!p-12">
           <BookingForm client:load />
         </div>
       </div>
@@ -36,7 +36,7 @@ import { site } from "~/data/site";
           </p>
         </div>
 
-        <div class="card reveal">
+        <div class="tile reveal">
           <p class="eyebrow">Hours</p>
           <dl class="mt-4 space-y-2 text-sm text-[var(--color-ink-soft)]">
             <div class="flex justify-between">
@@ -49,18 +49,18 @@ import { site } from "~/data/site";
             </div>
             <div class="flex justify-between">
               <dt>Sunday</dt>
-              <dd class="text-[var(--color-clay-deep)]">{site.hours.sunday}</dd>
+              <dd class="text-[var(--color-rose-deep)]">{site.hours.sunday}</dd>
             </div>
           </dl>
         </div>
 
-        <div class="card reveal">
+        <div class="tile reveal">
           <p class="eyebrow">Direct contact</p>
           <ul class="mt-4 space-y-3">
             {site.phones.map((p) => (
               <li class="flex items-center justify-between text-sm">
                 <span class="text-[var(--color-ink-muted)]">{p.label}</span>
-                <a href={`tel:${p.tel}`} class="font-display text-lg text-[var(--color-ink)] hover:text-[var(--color-clay-deep)]">
+                <a href={`tel:${p.tel}`} class="font-display text-lg text-[var(--color-laurel)] hover:text-[var(--color-rose-deep)]">
                   {p.number}
                 </a>
               </li>

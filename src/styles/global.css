@@ -1,40 +1,53 @@
 @import "tailwindcss";
 
 /* ============================================================
- * Design tokens — premium dermatology editorial aesthetic.
- * Inspired by Augustinus Bader / Tata Harper / La Mer.
- * Warm cream paper, clay-terracotta accents, sage botanicals.
+ * Brand: natural · soft · organic
+ * Palette is straight from the brand guide. Typography is
+ * Poppins (display) + Lato (body) — no serif, no script.
  * ============================================================ */
 @theme {
-  --font-display: "Fraunces", "Cormorant Garamond", Georgia, serif;
-  --font-body: "Inter", system-ui, -apple-system, sans-serif;
-  --font-italic: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  --font-display: "Poppins", system-ui, sans-serif;
+  --font-body: "Lato", system-ui, -apple-system, sans-serif;
 
-  --color-cream: #f7f1e8;
-  --color-cream-warm: #f2e9da;
-  --color-cream-deep: #ece0cd;
-  --color-paper: #fdfaf4;
+  /* Surface */
+  --color-white: #fefefe;
+  --color-cashmere: #ddd8cd;
+  --color-cashmere-soft: #e8e3d8;
+  --color-cashmere-deep: #c9c3b6;
 
-  --color-ink: #2a2520;
-  --color-ink-soft: #4a3f35;
-  --color-ink-muted: #7a6e60;
+  /* Brand greens */
+  --color-sage: #b0beb1;
+  --color-sage-soft: #d4dcd1;
+  --color-sage-mist: #e8eee5;
+  --color-olive: #899183;
+  --color-olive-deep: #6b7466;
+  --color-laurel: #2d362b;
+  --color-laurel-deep: #1d2419;
 
-  --color-clay: #c97b5c;
-  --color-clay-deep: #a85f44;
-  --color-clay-soft: #e8b9a3;
+  /* Accents */
+  --color-rose: #eba6a9;
+  --color-rose-soft: #f3cdce;
+  --color-rose-deep: #d77f83;
+  --color-mauve: #592a3e;
 
-  --color-sage: #7b8a6f;
-  --color-sage-deep: #5a6b50;
-  --color-sage-soft: #c4cdba;
+  /* Text */
+  --color-onyx: #121212;
+  --color-ink: #1f2a1c;
+  --color-ink-soft: #3d4a37;
+  --color-ink-muted: #6e7868;
 
-  --color-gold: #b8956a;
-  --color-gold-soft: #d4b896;
+  /* Elevation */
+  --shadow-soft: 0 1px 2px rgb(45 54 43 / 0.04), 0 8px 24px rgb(45 54 43 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(45 54 43 / 0.06), 0 24px 48px -12px rgb(45 54 43 / 0.18);
+  --shadow-glow: 0 0 0 1px rgb(176 190 177 / 0.5), 0 30px 60px -20px rgb(45 54 43 / 0.25);
 
-  --color-rose: #e8c5bc;
-  --color-rose-deep: #c98e7f;
-
-  --shadow-soft: 0 1px 2px rgb(42 37 32 / 0.04), 0 8px 24px rgb(42 37 32 / 0.06);
-  --shadow-lift: 0 2px 4px rgb(42 37 32 / 0.06), 0 24px 48px -12px rgb(42 37 32 / 0.18);
+  /* Organic blob radii — used on tiles to break the rectangle look. */
+  --r-organic-1: 38% 62% 63% 37% / 41% 44% 56% 59%;
+  --r-organic-2: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  --r-organic-3: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  --r-pill: 999px;
+  --r-soft: 1.75rem;
+  --r-soft-lg: 2.5rem;
 }
 
 /* ============================================================
@@ -49,46 +62,45 @@
   }
 
   body {
-    background-color: var(--color-cream);
-    color: var(--color-ink);
+    background-color: var(--color-cashmere);
+    color: var(--color-laurel);
     font-family: var(--font-body);
-    font-feature-settings: "ss01", "cv11";
+    font-weight: 400;
   }
 
-  /* Subtle paper-grain texture overlay — adds tactile premium feel. */
+  /* Soft botanical noise wash — barely visible, adds organic warmth. */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 1;
-    opacity: 0.035;
+    opacity: 0.025;
     mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
 
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
-    font-weight: 400;
+    font-weight: 300;
     letter-spacing: -0.02em;
-    color: var(--color-ink);
+    color: var(--color-laurel);
   }
 
   ::selection {
-    background-color: var(--color-clay);
-    color: var(--color-paper);
+    background-color: var(--color-rose);
+    color: var(--color-laurel-deep);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-clay);
+    outline: 2px solid var(--color-rose-deep);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 4px;
   }
 }
 
 /* ============================================================
- * Components — small reusable bits expressed in pure CSS so any
- * markup language (Astro/Svelte) can use them consistently.
+ * Components
  * ============================================================ */
 @layer components {
   .container-edge {
@@ -104,143 +116,203 @@
     .container-edge { padding-inline: 4rem; }
   }
 
+  /* Eyebrow — letter-spaced uppercase Lato. */
   .eyebrow {
     font-family: var(--font-body);
     font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
+    font-weight: 700;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--color-clay-deep);
+    color: var(--color-olive);
   }
 
+  /* Display sizes — Poppins extralight, lots of negative tracking. */
   .display-1 {
     font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(2.75rem, 6.5vw, 5.75rem);
-    line-height: 0.98;
-    letter-spacing: -0.035em;
+    font-weight: 200;
+    font-size: clamp(2.75rem, 6.5vw, 6rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
   }
-
   .display-2 {
     font-family: var(--font-display);
-    font-weight: 350;
+    font-weight: 300;
     font-size: clamp(2rem, 4.5vw, 3.5rem);
     line-height: 1.05;
     letter-spacing: -0.025em;
   }
+  .display-3 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
 
+  /* The "natural, soft, organic" italic moment — Poppins italic light. */
   .accent-italic {
-    font-family: var(--font-italic);
     font-style: italic;
-    font-weight: 400;
-    color: var(--color-clay-deep);
+    font-weight: 300;
+    color: var(--color-rose-deep);
   }
 
   .lead {
-    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
-    line-height: 1.55;
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+    line-height: 1.65;
     color: var(--color-ink-soft);
+    font-weight: 400;
   }
 
   .btn {
     display: inline-flex;
     align-items: center;
     gap: 0.625rem;
-    padding: 0.95rem 1.6rem;
+    padding: 1rem 1.75rem;
     font-family: var(--font-body);
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    border-radius: 999px;
-    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-radius: var(--r-pill);
+    transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
                 background-color 220ms ease,
                 color 220ms ease,
-                box-shadow 220ms ease;
+                box-shadow 320ms ease;
     will-change: transform;
   }
-  .btn:hover { transform: translateY(-1px); }
+  .btn:hover { transform: translateY(-2px); }
   .btn:active { transform: translateY(0); }
 
   .btn-primary {
-    background-color: var(--color-ink);
-    color: var(--color-paper);
+    background-color: var(--color-laurel);
+    color: var(--color-cashmere-soft);
   }
   .btn-primary:hover {
-    background-color: var(--color-clay-deep);
+    background-color: var(--color-rose-deep);
+    color: var(--color-white);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .btn-rose {
+    background-color: var(--color-rose);
+    color: var(--color-laurel-deep);
+  }
+  .btn-rose:hover {
+    background-color: var(--color-rose-deep);
+    color: var(--color-white);
     box-shadow: var(--shadow-lift);
   }
 
   .btn-ghost {
     background-color: transparent;
-    color: var(--color-ink);
-    border: 1px solid color-mix(in oklab, var(--color-ink) 18%, transparent);
+    color: var(--color-laurel);
+    border: 1px solid color-mix(in oklab, var(--color-laurel) 22%, transparent);
   }
   .btn-ghost:hover {
-    background-color: var(--color-ink);
-    color: var(--color-paper);
-    border-color: var(--color-ink);
+    background-color: var(--color-laurel);
+    color: var(--color-cashmere-soft);
+    border-color: var(--color-laurel);
   }
 
   .arrow {
     display: inline-block;
-    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .btn:hover .arrow { transform: translateX(4px); }
 
-  .card {
-    background-color: var(--color-paper);
-    border-radius: 1.25rem;
+  /* Tile — soft white surface, gentle elevation. The basic bento brick. */
+  .tile {
+    background-color: var(--color-white);
+    border-radius: var(--r-soft);
     padding: 2rem;
     box-shadow: var(--shadow-soft);
-    transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
-                box-shadow 320ms ease;
+    transition: transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 420ms ease;
+    position: relative;
+    overflow: hidden;
   }
-  .card:hover {
+  .tile:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lift);
   }
+
+  /* Glass — translucent panel for layered moments. */
+  .glass {
+    background-color: color-mix(in oklab, var(--color-white) 65%, transparent);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border-radius: var(--r-soft);
+    border: 1px solid color-mix(in oklab, var(--color-white) 50%, transparent);
+  }
+
+  .tile-sage     { background-color: var(--color-sage);          color: var(--color-laurel-deep); }
+  .tile-rose     { background-color: var(--color-rose);          color: var(--color-laurel-deep); }
+  .tile-laurel   { background-color: var(--color-laurel);        color: var(--color-cashmere-soft); }
+  .tile-cashmere { background-color: var(--color-cashmere-soft); color: var(--color-laurel); }
+
+  /* Organic blob shapes. */
+  .blob-1 { border-radius: var(--r-organic-1); }
+  .blob-2 { border-radius: var(--r-organic-2); }
+  .blob-3 { border-radius: var(--r-organic-3); }
 
   .hairline {
     height: 1px;
     background: linear-gradient(
       to right,
       transparent,
-      color-mix(in oklab, var(--color-ink) 14%, transparent),
+      color-mix(in oklab, var(--color-olive) 30%, transparent),
       transparent
     );
   }
 
-  .marquee {
+  /* Horizontal scroll-snap rail (treatments). */
+  .scroll-rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 78%;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.25rem;
+    padding-inline: 1.25rem;
+    padding-bottom: 1.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-olive) transparent;
+  }
+  @media (min-width: 768px) {
+    .scroll-rail { grid-auto-columns: 42%; gap: 1.25rem; padding-inline: 2.5rem; scroll-padding-inline: 2.5rem; }
+  }
+  @media (min-width: 1280px) {
+    .scroll-rail { grid-auto-columns: 28%; padding-inline: 4rem; scroll-padding-inline: 4rem; }
+  }
+  .scroll-rail > * { scroll-snap-align: start; }
+  .scroll-rail::-webkit-scrollbar { height: 4px; }
+  .scroll-rail::-webkit-scrollbar-thumb { background: var(--color-olive); border-radius: 2px; }
+
+  .ticker {
     display: flex;
     gap: 3rem;
-    animation: marquee 38s linear infinite;
+    animation: ticker 42s linear infinite;
     will-change: transform;
   }
-  @keyframes marquee {
+  @keyframes ticker {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
   }
 
-  /* Fade-up reveal — IntersectionObserver toggles `.is-in`. */
   .reveal {
     opacity: 0;
     transform: translateY(28px);
     transition: opacity 900ms cubic-bezier(0.2, 0.8, 0.2, 1),
                 transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .reveal.is-in {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.is-in { opacity: 1; transform: translateY(0); }
 }
 
-/* ============================================================
- * View Transitions — buttery cross-page morph (Astro built-in).
- * ============================================================ */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 420ms;
+  animation-duration: 480ms;
   animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -251,4 +323,5 @@
     scroll-behavior: auto !important;
   }
   .reveal { opacity: 1; transform: none; }
+  .ticker { animation: none; }
 }

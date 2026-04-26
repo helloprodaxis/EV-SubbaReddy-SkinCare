@@ -1,25 +1,27 @@
 ---
 const items = [
-  "Skin",
-  "Hair",
-  "Nail",
-  "Allergy",
-  "Laser",
-  "Pigmentation",
-  "Acne",
-  "Psoriasis",
-  "Vitiligo",
-  "Cosmetology",
+  "natural",
+  "soft",
+  "organic",
+  "skin",
+  "hair",
+  "laser",
+  "calm",
+  "evidence-led",
+  "transparent",
+  "kadapa",
 ];
 const doubled = [...items, ...items];
 ---
 
-<div class="relative overflow-hidden border-y border-[color-mix(in_oklab,var(--color-ink)_10%,transparent)] bg-[var(--color-cream)]">
-  <div class="marquee py-6">
+<div class="relative overflow-hidden py-8 md:py-10 bg-[var(--color-laurel)] text-[var(--color-cashmere-soft)]">
+  <div class="ticker">
     {doubled.map((item) => (
-      <span class="flex items-center gap-12 shrink-0 font-display text-2xl md:text-4xl font-light text-[var(--color-ink-soft)]">
+      <span class="flex items-center gap-10 shrink-0 font-display text-2xl md:text-4xl font-extralight italic tracking-tight">
         {item}
-        <span class="text-[var(--color-clay)]" aria-hidden="true">✦</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <circle cx="7" cy="7" r="3" fill="var(--color-rose)"/>
+        </svg>
       </span>
     ))}
   </div>
