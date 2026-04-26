@@ -1,47 +1,67 @@
 @import "tailwindcss";
 
 /* ============================================================
- * Brand: natural · soft · organic
- * Palette is straight from the brand guide. Typography is
- * Poppins (display) + Lato (body) — no serif, no script.
+ * Brand: clinical · soft · premium
+ * Palette pivot — out: cashmere beige + green laurel.
+ * In: white + blush pink + powder blue + deep navy + rose-gold.
+ * Typography: Poppins (display, ExtraLight → Black) + Lato (body).
  * ============================================================ */
 @theme {
   --font-display: "Poppins", system-ui, sans-serif;
   --font-body: "Lato", system-ui, -apple-system, sans-serif;
 
   /* Surface */
-  --color-white: #fefefe;
-  --color-cashmere: #ddd8cd;
-  --color-cashmere-soft: #e8e3d8;
-  --color-cashmere-deep: #c9c3b6;
+  --color-white: #ffffff;
+  --color-paper: #fdfaf7;
+  --color-cream: #faf5ef;
 
-  /* Brand greens */
-  --color-sage: #b0beb1;
-  --color-sage-soft: #d4dcd1;
-  --color-sage-mist: #e8eee5;
-  --color-olive: #899183;
-  --color-olive-deep: #6b7466;
-  --color-laurel: #2d362b;
-  --color-laurel-deep: #1d2419;
-
-  /* Accents */
+  /* Blush / pink */
+  --color-blush: #fde7e8;
+  --color-blush-soft: #fce5e5;
+  --color-blush-deep: #f3cdce;
   --color-rose: #eba6a9;
-  --color-rose-soft: #f3cdce;
-  --color-rose-deep: #d77f83;
-  --color-mauve: #592a3e;
+  --color-rose-deep: #c97583;
+  --color-rose-rich: #a04a5a;
+  --color-mauve: #4a2532;
 
-  /* Text */
-  --color-onyx: #121212;
-  --color-ink: #1f2a1c;
-  --color-ink-soft: #3d4a37;
-  --color-ink-muted: #6e7868;
+  /* Powder blue / sky */
+  --color-sky: #e8eef3;
+  --color-sky-soft: #dce7ee;
+  --color-sky-mid: #b8ccd9;
+  --color-sky-deep: #5c7a8a;
+  --color-sky-rich: #2c4858;
+
+  /* Gold accent (subtle rose-gold) */
+  --color-gold: #c9a876;
+  --color-gold-soft: #e0c89f;
+
+  /* Ink — cool deep navy replaces the green laurel */
+  --color-ink: #1a2530;
+  --color-ink-soft: #2a3741;
+  --color-ink-mid: #4a5560;
+  --color-ink-muted: #7a8590;
+  --color-ink-faint: #b0bac5;
+
+  /* Compatibility aliases for components written against the old names */
+  --color-cashmere: var(--color-paper);
+  --color-cashmere-soft: var(--color-paper);
+  --color-cashmere-deep: var(--color-cream);
+  --color-laurel: var(--color-ink);
+  --color-laurel-deep: var(--color-mauve);
+  --color-onyx: var(--color-ink);
+  --color-sage: var(--color-sky-mid);
+  --color-sage-soft: var(--color-sky-soft);
+  --color-sage-mist: var(--color-sky);
+  --color-olive: var(--color-ink-muted);
+  --color-olive-deep: var(--color-ink-mid);
+  --color-rose-soft: var(--color-blush-deep);
 
   /* Elevation */
-  --shadow-soft: 0 1px 2px rgb(45 54 43 / 0.04), 0 8px 24px rgb(45 54 43 / 0.06);
-  --shadow-lift: 0 2px 4px rgb(45 54 43 / 0.06), 0 24px 48px -12px rgb(45 54 43 / 0.18);
-  --shadow-glow: 0 0 0 1px rgb(176 190 177 / 0.5), 0 30px 60px -20px rgb(45 54 43 / 0.25);
+  --shadow-soft: 0 1px 2px rgb(26 37 48 / 0.04), 0 8px 24px rgb(26 37 48 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(26 37 48 / 0.06), 0 24px 48px -12px rgb(26 37 48 / 0.18);
+  --shadow-cinema: 0 30px 80px -20px rgb(26 37 48 / 0.35);
 
-  /* Organic blob radii — used on tiles to break the rectangle look. */
+  /* Organic blob radii */
   --r-organic-1: 38% 62% 63% 37% / 41% 44% 56% 59%;
   --r-organic-2: 60% 40% 30% 70% / 60% 30% 70% 40%;
   --r-organic-3: 30% 70% 70% 30% / 30% 30% 70% 70%;
@@ -62,13 +82,13 @@
   }
 
   body {
-    background-color: var(--color-cashmere);
-    color: var(--color-laurel);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
     font-family: var(--font-body);
     font-weight: 400;
   }
 
-  /* Soft botanical noise wash — barely visible, adds organic warmth. */
+  /* Very subtle film-grain wash. */
   body::before {
     content: "";
     position: fixed;
@@ -80,16 +100,19 @@
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
 
+  /* IMPORTANT: heading colour inherits from parent. This was the bug —
+     a hard-coded color on h3 was hiding the doctor name on the dark card.
+     Headings now follow whatever the surrounding section sets. */
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
     font-weight: 300;
     letter-spacing: -0.02em;
-    color: var(--color-laurel);
+    color: inherit;
   }
 
   ::selection {
     background-color: var(--color-rose);
-    color: var(--color-laurel-deep);
+    color: var(--color-ink);
   }
 
   :focus-visible {
@@ -115,28 +138,36 @@
   @media (min-width: 1280px) {
     .container-edge { padding-inline: 4rem; }
   }
+  .container-wide {
+    width: 100%;
+    max-width: 96rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-wide { padding-inline: 2.5rem; }
+  }
+  @media (min-width: 1280px) {
+    .container-wide { padding-inline: 4rem; }
+  }
 
-  /* Eyebrow — letter-spaced uppercase Lato. */
   .eyebrow {
     font-family: var(--font-body);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--color-olive);
+    color: var(--color-rose-deep);
   }
 
-  /* Display sizes.
-   *  display-mega → Poppins Black at hero scale (the "premium moment").
-   *  display-1/2/3 → lighter weights for inner page heroes & section heads.
-   */
+  /* The cinematic display moment. */
   .display-mega {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(3.5rem, 11vw, 10.5rem);
+    font-size: clamp(3.5rem, 12vw, 11rem);
     line-height: 0.92;
     letter-spacing: -0.05em;
-    color: var(--color-onyx);
+    color: var(--color-ink);
   }
   .display-1 {
     font-family: var(--font-display);
@@ -160,7 +191,6 @@
     letter-spacing: -0.015em;
   }
 
-  /* The "natural, soft, organic" italic moment — Poppins italic light. */
   .accent-italic {
     font-style: italic;
     font-weight: 300;
@@ -171,7 +201,7 @@
     font-family: var(--font-body);
     font-size: clamp(1.05rem, 1.4vw, 1.18rem);
     line-height: 1.65;
-    color: var(--color-ink-soft);
+    color: var(--color-ink-mid);
     font-weight: 400;
   }
 
@@ -181,9 +211,9 @@
     gap: 0.625rem;
     padding: 1rem 1.75rem;
     font-family: var(--font-body);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     border-radius: var(--r-pill);
     transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -196,34 +226,34 @@
   .btn:active { transform: translateY(0); }
 
   .btn-primary {
-    background-color: var(--color-laurel);
-    color: var(--color-cashmere-soft);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
   }
   .btn-primary:hover {
-    background-color: var(--color-rose-deep);
+    background-color: var(--color-rose-rich);
     color: var(--color-white);
     box-shadow: var(--shadow-lift);
   }
 
   .btn-rose {
-    background-color: var(--color-rose);
-    color: var(--color-laurel-deep);
+    background-color: var(--color-rose-rich);
+    color: var(--color-white);
   }
   .btn-rose:hover {
-    background-color: var(--color-rose-deep);
+    background-color: var(--color-mauve);
     color: var(--color-white);
     box-shadow: var(--shadow-lift);
   }
 
   .btn-ghost {
     background-color: transparent;
-    color: var(--color-laurel);
-    border: 1px solid color-mix(in oklab, var(--color-laurel) 22%, transparent);
+    color: var(--color-ink);
+    border: 1px solid color-mix(in oklab, var(--color-ink) 20%, transparent);
   }
   .btn-ghost:hover {
-    background-color: var(--color-laurel);
-    color: var(--color-cashmere-soft);
-    border-color: var(--color-laurel);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    border-color: var(--color-ink);
   }
 
   .arrow {
@@ -232,7 +262,6 @@
   }
   .btn:hover .arrow { transform: translateX(4px); }
 
-  /* Tile — soft white surface, gentle elevation. The basic bento brick. */
   .tile {
     background-color: var(--color-white);
     border-radius: var(--r-soft);
@@ -248,7 +277,6 @@
     box-shadow: var(--shadow-lift);
   }
 
-  /* Glass — translucent panel for layered moments. */
   .glass {
     background-color: color-mix(in oklab, var(--color-white) 65%, transparent);
     backdrop-filter: blur(20px) saturate(140%);
@@ -257,12 +285,17 @@
     border: 1px solid color-mix(in oklab, var(--color-white) 50%, transparent);
   }
 
-  .tile-sage     { background-color: var(--color-sage);          color: var(--color-laurel-deep); }
-  .tile-rose     { background-color: var(--color-rose);          color: var(--color-laurel-deep); }
-  .tile-laurel   { background-color: var(--color-laurel);        color: var(--color-cashmere-soft); }
-  .tile-cashmere { background-color: var(--color-cashmere-soft); color: var(--color-laurel); }
+  .tile-blush  { background-color: var(--color-blush);  color: var(--color-mauve); }
+  .tile-rose   { background-color: var(--color-rose);   color: var(--color-mauve); }
+  .tile-sky    { background-color: var(--color-sky-soft); color: var(--color-sky-rich); }
+  .tile-ink    { background-color: var(--color-ink);    color: var(--color-blush); }
+  .tile-paper  { background-color: var(--color-paper);  color: var(--color-ink); }
 
-  /* Organic blob shapes. */
+  /* Compatibility shims for older class names */
+  .tile-cashmere { background-color: var(--color-cream); color: var(--color-ink); }
+  .tile-sage     { background-color: var(--color-sky-soft); color: var(--color-sky-rich); }
+  .tile-laurel   { background-color: var(--color-ink); color: var(--color-blush); }
+
   .blob-1 { border-radius: var(--r-organic-1); }
   .blob-2 { border-radius: var(--r-organic-2); }
   .blob-3 { border-radius: var(--r-organic-3); }
@@ -272,12 +305,11 @@
     background: linear-gradient(
       to right,
       transparent,
-      color-mix(in oklab, var(--color-olive) 30%, transparent),
+      color-mix(in oklab, var(--color-ink) 20%, transparent),
       transparent
     );
   }
 
-  /* Horizontal scroll-snap rail (treatments). */
   .scroll-rail {
     display: grid;
     grid-auto-flow: column;
@@ -289,7 +321,7 @@
     padding-inline: 1.25rem;
     padding-bottom: 1.5rem;
     scrollbar-width: thin;
-    scrollbar-color: var(--color-olive) transparent;
+    scrollbar-color: var(--color-rose-deep) transparent;
   }
   @media (min-width: 768px) {
     .scroll-rail { grid-auto-columns: 42%; gap: 1.25rem; padding-inline: 2.5rem; scroll-padding-inline: 2.5rem; }
@@ -299,7 +331,7 @@
   }
   .scroll-rail > * { scroll-snap-align: start; }
   .scroll-rail::-webkit-scrollbar { height: 4px; }
-  .scroll-rail::-webkit-scrollbar-thumb { background: var(--color-olive); border-radius: 2px; }
+  .scroll-rail::-webkit-scrollbar-thumb { background: var(--color-rose-deep); border-radius: 2px; }
 
   .ticker {
     display: flex;
@@ -312,6 +344,18 @@
     to   { transform: translateX(-50%); }
   }
 
+  /* Vertical scrolling chapter mark. */
+  .chapter-mark {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--color-rose-deep);
+  }
+
   .reveal {
     opacity: 0;
     transform: translateY(28px);
@@ -319,6 +363,15 @@
                 transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .reveal.is-in { opacity: 1; transform: translateY(0); }
+
+  /* Floating credit pill — used in the cinematic footer. */
+  .credit-line {
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
 }
 
 ::view-transition-old(root),

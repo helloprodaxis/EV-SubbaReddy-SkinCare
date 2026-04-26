@@ -4,11 +4,12 @@
  */
 
 export const site = {
-  name: "Dr. E.V. Subba Reddy",
-  tagline: "Advanced Skin & Laser Centre",
+  name: "Dr. E V Subba Reddy",
+  fullName: "Dr. E V Subba Reddy Advanced Skin and Laser Center",
+  tagline: "Advanced Skin and Laser Center",
   shortName: "Subba Reddy Skin",
   description:
-    "Kadapa's trusted dermatology, cosmetology and laser clinic — led by Dr. E.V. Subba Reddy, MD, ex-Registrar JIPMER Pondicherry.",
+    "Kadapa's trusted dermatology, cosmetology and laser clinic — led by Dr. E V Subba Reddy, MD, ex-Registrar JIPMER Pondicherry.",
   url: "https://drsubbareddyskin.in",
   city: "Kadapa",
   state: "Andhra Pradesh",
@@ -17,7 +18,7 @@ export const site = {
 
   // ⚠️ TODO: replace with the new building address after the recent shift.
   address: {
-    line1: "Advanced Skin & Laser Centre",
+    line1: "Advanced Skin and Laser Center",
     line2: "[New building address — Kadapa]",
     area: "Ganagapeta",
     city: "Kadapa",

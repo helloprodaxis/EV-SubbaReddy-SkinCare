@@ -1,66 +1,127 @@
 ---
 import { doctors } from "~/data/doctors";
-import Leaf from "./Leaf.astro";
 
+// Three palette pairings — each card gets its own personality.
 const palette = [
-  { bg: "var(--color-sage)",   ink: "var(--color-laurel-deep)", accent: "var(--color-laurel)" },
-  { bg: "var(--color-rose)",   ink: "var(--color-laurel-deep)", accent: "var(--color-mauve)" },
-  { bg: "var(--color-laurel)", ink: "var(--color-cashmere-soft)", accent: "var(--color-rose)" },
+  {
+    bg: "var(--color-sky-soft)",
+    text: "var(--color-sky-rich)",
+    accent: "var(--color-sky-deep)",
+    avatar: "linear-gradient(135deg, #ffffff 0%, #b8ccd9 60%, #5c7a8a 100%)",
+    chip: "var(--color-white)",
+  },
+  {
+    bg: "var(--color-blush)",
+    text: "var(--color-mauve)",
+    accent: "var(--color-rose-rich)",
+    avatar: "linear-gradient(135deg, #ffffff 0%, #f3cdce 55%, #c97583 100%)",
+    chip: "var(--color-white)",
+  },
+  {
+    bg: "var(--color-ink)",
+    text: "var(--color-blush)",
+    accent: "var(--color-rose)",
+    avatar: "linear-gradient(135deg, #2a3741 0%, #4a5560 60%, #c97583 100%)",
+    chip: "var(--color-paper)",
+  },
 ];
+
+const initials = (name: string) =>
+  name.split(" ").slice(1).map((s) => s[0]).join("");
 ---
 
 {/*
- * Doctors — overlapping stacked cards with organic-blob avatars.
- * The cards step down/right so the composition feels like a fan, not a row.
+ * DoctorsPreview — editorial chapter card stack. Each doctor gets a
+ * distinct background colour drawn from the brand (blue, blush, ink),
+ * a large blob-shaped avatar with initials, and the FULL NAME visible.
+ *
+ * The name visibility bug from the previous version came from the global
+ * h3 colour rule overriding the card's foreground colour. Fixed in
+ * global.css: headings now inherit colour. We also explicitly set the
+ * heading colour here as belt-and-braces.
  */}
-<section class="container-edge py-24 md:py-32">
-  <div class="max-w-2xl reveal">
-    <p class="eyebrow">03 · The doctors</p>
-    <h2 class="display-2 mt-4">
-      Three specialists.
-      <br />
-      <span class="accent-italic">One standard.</span>
-    </h2>
-  </div>
+<section class="relative py-24 md:py-36">
+  <div class="container-edge">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 reveal">
+      <div>
+        <p class="credit-line text-[var(--color-rose-deep)] flex items-center gap-3">
+          <span class="w-6 h-px bg-[var(--color-rose-deep)]"></span>
+          Chapter 03 — The Doctors
+        </p>
+        <h2 class="display-2 mt-6 max-w-2xl">
+          Three specialists.
+          <br />
+          <span class="accent-italic">One standard.</span>
+        </h2>
+      </div>
+      <a href="/doctors" class="btn btn-ghost self-start md:self-end">
+        All profiles
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
 
-  <div class="hairline mt-10"></div>
+    <div class="hairline mt-14"></div>
 
-  <div class="mt-14 grid gap-6 md:grid-cols-3 md:items-end">
-    {doctors.map((d, i) => {
-      const c = palette[i];
-      return (
-        <a
-          href={`/doctors#${d.slug}`}
-          class="reveal group block rounded-[var(--r-soft)] p-7 md:p-8 transition-transform hover:-translate-y-2"
-          style={`background:${c.bg}; color:${c.ink}; transition-delay:${i * 100}ms; ${i === 1 ? 'margin-top:-1.5rem;' : i === 2 ? '' : ''}`}
-        >
-          {/* Organic blob avatar — initials inside */}
-          <div class="flex items-start justify-between">
-            <div
-              class="w-20 h-20 grid place-items-center font-display text-3xl font-extralight blob-1 transition-all duration-700 group-hover:[border-radius:var(--r-organic-2)]"
-              style={`background:color-mix(in oklab,${c.accent} 25%,transparent); color:${c.ink};`}
-            >
-              {d.name.split(" ").slice(1).map((s) => s[0]).join("")}
+    <div class="mt-14 grid gap-6 md:grid-cols-3 md:items-stretch">
+      {doctors.map((d, i) => {
+        const c = palette[i];
+        const offset = i === 1 ? "md:translate-y-8" : i === 2 ? "md:-translate-y-4" : "";
+        return (
+          <a
+            href={`/doctors#${d.slug}`}
+            class={`reveal group relative block rounded-[var(--r-soft)] p-7 md:p-8 transition-transform duration-500 hover:-translate-y-2 ${offset}`}
+            style={`background:${c.bg}; color:${c.text}; transition-delay:${i * 100}ms;`}
+          >
+            {/* Top row — chapter pill + qualifications */}
+            <div class="flex items-start justify-between gap-3">
+              <span class="text-[0.62rem] uppercase tracking-[0.28em] font-bold opacity-70">
+                {String(i + 1).padStart(2, "0")} — {d.qualifications}
+              </span>
+              <span
+                class="text-[0.62rem] uppercase tracking-[0.22em] font-bold px-3 py-1 rounded-full"
+                style={`background:${c.chip}; color:${c.accent};`}
+              >
+                {d.specialties[0]}
+              </span>
             </div>
-            <Leaf size={28} color={c.accent} rotation={i * 30 - 15} opacity={0.8} />
-          </div>
 
-          <div class="mt-8">
-            <span class="text-[0.68rem] uppercase tracking-[0.22em] font-bold opacity-70">
-              0{i + 1} · {d.qualifications}
-            </span>
-            <h3 class="font-display text-2xl md:text-3xl font-light mt-2 leading-tight">
-              {d.name}
-            </h3>
-            <p class="text-sm mt-2 opacity-80">{d.role}</p>
-          </div>
+            {/* Big blob-shaped avatar with initials */}
+            <div class="mt-8 flex items-center gap-5">
+              <div
+                class="w-24 h-24 grid place-items-center font-display text-2xl font-semibold blob-1 transition-all duration-700 group-hover:[border-radius:var(--r-organic-2)]"
+                style={`background:${c.avatar}; color:${c.text}; text-shadow:0 1px 2px rgb(0 0 0 / 0.08);`}
+              >
+                {initials(d.name)}
+              </div>
+              <div class="flex-1">
+                <span class="text-[0.62rem] uppercase tracking-[0.22em] font-bold opacity-70">
+                  Dr. 0{i + 1}
+                </span>
+                {/* The name — colour is forced inline so nothing can hide it. */}
+                <h3
+                  class="font-display font-light text-2xl mt-1 leading-tight"
+                  style={`color:${c.text};`}
+                >
+                  {d.name}
+                </h3>
+              </div>
+            </div>
 
-          <div class="mt-8 pt-5 border-t border-current/15 flex items-center justify-between text-[0.7rem] uppercase tracking-[0.18em] font-bold">
-            <span class="opacity-70">{d.specialties.slice(0, 3).join(" · ")}</span>
-            <span class="arrow opacity-90" aria-hidden="true">→</span>
-          </div>
-        </a>
-      );
-    })}
+            {/* Role */}
+            <p class="mt-6 text-base leading-relaxed opacity-90">
+              {d.role}
+            </p>
+
+            {/* Specialties */}
+            <div class="mt-6 pt-5 border-t flex items-center justify-between text-[0.66rem] uppercase tracking-[0.22em] font-bold" style={`border-color:color-mix(in oklab, ${c.text} 18%, transparent);`}>
+              <span class="opacity-80">
+                {d.specialties.slice(0, 3).join(" · ")}
+              </span>
+              <span class="arrow opacity-90" aria-hidden="true">→</span>
+            </div>
+          </a>
+        );
+      })}
+    </div>
   </div>
 </section>

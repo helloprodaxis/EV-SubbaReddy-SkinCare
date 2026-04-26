@@ -1,58 +1,62 @@
 ---
 /**
- * Soft cosmetic-cream swirl backdrop for the hero — pure SVG + CSS, no
- * stock photography. Layered radial gradients + a SVG turbulence "smoke"
- * give the same blurred-cream feel as the Augustinus Bader / Celestia hero.
+ * Atmospheric mesh backdrop — soft blush pink fading into powder blue,
+ * with a warm cream centre and a faint cosmetic-cream "swirl" disk.
+ * All CSS + SVG, no stock photography. Used behind the hero only.
  */
 ---
 
 <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
-  {/* Base wash */}
+  {/* Mesh wash — pink top-right, blue bottom-left, paper centre. */}
   <div
     class="absolute inset-0"
     style="background:
-      radial-gradient(60% 70% at 50% 45%, color-mix(in oklab, var(--color-rose-soft) 70%, transparent) 0%, transparent 70%),
-      radial-gradient(40% 50% at 12% 18%, color-mix(in oklab, var(--color-sage) 50%, transparent) 0%, transparent 70%),
-      radial-gradient(40% 50% at 88% 22%, color-mix(in oklab, var(--color-rose) 35%, transparent) 0%, transparent 70%),
-      linear-gradient(180deg, var(--color-cashmere-soft) 0%, var(--color-cashmere) 100%);"
+      radial-gradient(50% 60% at 88% 8%, color-mix(in oklab, var(--color-blush-deep) 75%, transparent) 0%, transparent 65%),
+      radial-gradient(55% 65% at 6% 88%, color-mix(in oklab, var(--color-sky-mid) 55%, transparent) 0%, transparent 70%),
+      radial-gradient(45% 55% at 92% 92%, color-mix(in oklab, var(--color-blush) 70%, transparent) 0%, transparent 65%),
+      radial-gradient(40% 50% at 8% 12%, color-mix(in oklab, var(--color-sky-soft) 60%, transparent) 0%, transparent 70%),
+      linear-gradient(170deg, var(--color-paper) 0%, var(--color-cream) 100%);"
   ></div>
 
-  {/* Big SVG cream-swirl in the centre */}
+  {/* Centre cosmetic swirl — soft blurred concentric rings. */}
   <svg
-    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] w-[80vw] max-w-[1100px] aspect-square opacity-70"
+    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] w-[85vw] max-w-[1200px] aspect-square opacity-55"
     viewBox="0 0 800 800"
     fill="none"
   >
     <defs>
       <radialGradient id="swirl-core" cx="0.5" cy="0.5" r="0.5">
-        <stop offset="0" stop-color="#fce5e5"/>
-        <stop offset="0.55" stop-color="#f3cdce"/>
-        <stop offset="0.85" stop-color="#eba6a9" stop-opacity="0.5"/>
-        <stop offset="1" stop-color="#eba6a9" stop-opacity="0"/>
+        <stop offset="0" stop-color="#fdfaf7"/>
+        <stop offset="0.45" stop-color="#fde7e8" stop-opacity="0.85"/>
+        <stop offset="0.8" stop-color="#dce7ee" stop-opacity="0.45"/>
+        <stop offset="1" stop-color="#dce7ee" stop-opacity="0"/>
       </radialGradient>
-      <radialGradient id="swirl-inner" cx="0.5" cy="0.45" r="0.35">
-        <stop offset="0" stop-color="#fdfaf3"/>
-        <stop offset="0.5" stop-color="#f7d9da" stop-opacity="0.6"/>
-        <stop offset="1" stop-color="#f3cdce" stop-opacity="0"/>
+      <radialGradient id="swirl-inner" cx="0.5" cy="0.45" r="0.32">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset="0.6" stop-color="#fce5e5" stop-opacity="0.7"/>
+        <stop offset="1" stop-color="#fce5e5" stop-opacity="0"/>
       </radialGradient>
       <filter id="blur-soft">
-        <feGaussianBlur stdDeviation="20"/>
+        <feGaussianBlur stdDeviation="22"/>
       </filter>
     </defs>
     <circle cx="400" cy="400" r="380" fill="url(#swirl-core)" filter="url(#blur-soft)"/>
     <circle cx="400" cy="380" r="240" fill="url(#swirl-inner)" filter="url(#blur-soft)"/>
-    {/* Spiral ridges to suggest cream texture */}
-    <g stroke="#f3cdce" stroke-width="1.2" fill="none" opacity="0.45">
-      <path d="M 400 400 m -180 0 a 180 180 0 1 0 360 0 a 180 180 0 1 0 -360 0" />
-      <path d="M 400 400 m -140 0 a 140 140 0 1 0 280 0 a 140 140 0 1 0 -280 0" />
-      <path d="M 400 400 m -100 0 a 100 100 0 1 0 200 0 a 100 100 0 1 0 -200 0" />
-      <path d="M 400 400 m -65 0 a 65 65 0 1 0 130 0 a 65 65 0 1 0 -130 0" />
+    <g stroke="#f3cdce" stroke-width="1" fill="none" opacity="0.35">
+      <circle cx="400" cy="400" r="180"/>
+      <circle cx="400" cy="400" r="140"/>
+      <circle cx="400" cy="400" r="100"/>
+      <circle cx="400" cy="400" r="65"/>
+    </g>
+    <g stroke="#b8ccd9" stroke-width="0.8" fill="none" opacity="0.3">
+      <circle cx="400" cy="400" r="320"/>
+      <circle cx="400" cy="400" r="270"/>
     </g>
   </svg>
 
-  {/* Subtle film grain on top */}
+  {/* Subtle film grain. */}
   <div
-    class="absolute inset-0 opacity-30 mix-blend-multiply"
+    class="absolute inset-0 opacity-25 mix-blend-multiply"
     style="background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.15'/></svg>&quot;);"
   ></div>
 </div>

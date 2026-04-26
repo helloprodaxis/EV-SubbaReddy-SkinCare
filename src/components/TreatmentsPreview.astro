@@ -3,33 +3,30 @@ import { treatments, treatmentCategories } from "~/data/treatments";
 
 const featured = treatments.slice(0, 8);
 
-// Cycle through quieter palette accents — the cards themselves stay white.
 const accents = [
-  "var(--color-rose-deep)",
-  "var(--color-olive-deep)",
+  "var(--color-rose-rich)",
+  "var(--color-sky-deep)",
   "var(--color-mauve)",
-  "var(--color-laurel)",
+  "var(--color-rose-deep)",
 ];
 ---
 
-{/*
- * Treatments — horizontal scroll-snap rail. White cards, tall portrait
- * format, oversized numbered marks, single accent dot per card. Calmer
- * than the cycling-color version — the typography does the lifting.
- */}
 <section class="relative py-24 md:py-32 overflow-hidden">
   <div class="container-edge">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 reveal">
       <div class="max-w-2xl">
-        <p class="eyebrow">Treatments — 01</p>
-        <h2 class="display-2 mt-4">
+        <p class="credit-line text-[var(--color-rose-deep)] flex items-center gap-3">
+          <span class="w-6 h-px bg-[var(--color-rose-deep)]"></span>
+          Chapter 01 — Treatments
+        </p>
+        <h2 class="display-2 mt-6">
           What we treat,
           <br />
           <span class="accent-italic">how we treat it.</span>
         </h2>
       </div>
       <div class="flex items-center gap-6 self-start md:self-end">
-        <p class="text-[0.7rem] uppercase tracking-[0.22em] font-bold text-[var(--color-olive)] hidden md:block">
+        <p class="text-[0.7rem] uppercase tracking-[0.22em] font-bold text-[var(--color-rose-deep)] hidden md:block">
           ← scroll →
         </p>
         <a href="/treatments" class="btn btn-ghost">
@@ -48,7 +45,7 @@ const accents = [
       return (
         <a
           href={`/treatments#${t.slug}`}
-          class="reveal group bg-[var(--color-white)] rounded-[var(--r-soft)] p-8 md:p-10 flex flex-col justify-between min-h-[440px] md:min-h-[480px] transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)] shadow-[0_1px_2px_rgb(45_54_43/0.04)]"
+          class="reveal group bg-[var(--color-white)] rounded-[var(--r-soft)] p-8 md:p-10 flex flex-col justify-between min-h-[440px] md:min-h-[480px] transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)] shadow-[0_1px_2px_rgb(26_37_48/0.04)]"
         >
           <div class="flex items-start justify-between">
             <span
@@ -65,20 +62,20 @@ const accents = [
           </div>
 
           <div class="mt-8">
-            <span class="text-[0.66rem] uppercase tracking-[0.24em] font-bold text-[var(--color-olive)]">
+            <span class="text-[0.66rem] uppercase tracking-[0.24em] font-bold text-[var(--color-rose-deep)]">
               {treatmentCategories[t.category].label}
             </span>
-            <h3 class="font-display font-light text-3xl md:text-4xl mt-3 leading-[1.05] tracking-tight text-[var(--color-laurel)] group-hover:text-[var(--color-rose-deep)] transition-colors">
+            <h3 class="font-display font-light text-3xl md:text-4xl mt-3 leading-[1.05] tracking-tight text-[var(--color-ink)] group-hover:text-[var(--color-rose-rich)] transition-colors">
               {t.title}
             </h3>
-            <p class="mt-4 text-sm leading-relaxed text-[var(--color-ink-soft)]">
+            <p class="mt-4 text-sm leading-relaxed text-[var(--color-ink-mid)]">
               {t.blurb}
             </p>
           </div>
 
-          <div class="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] font-bold pt-6 mt-6 border-t border-[var(--color-cashmere)]">
-            <span class="text-[var(--color-olive)]">{t.duration}</span>
-            <span class="arrow text-[var(--color-laurel)]" aria-hidden="true">→</span>
+          <div class="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] font-bold pt-6 mt-6 border-t border-[var(--color-blush-soft)]">
+            <span class="text-[var(--color-rose-deep)]">{t.duration}</span>
+            <span class="arrow text-[var(--color-ink)]" aria-hidden="true">→</span>
           </div>
         </a>
       );

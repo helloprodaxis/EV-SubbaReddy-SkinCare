@@ -1,73 +1,177 @@
 ---
 import { site } from "~/data/site";
-import Leaf from "./Leaf.astro";
 
 const year = new Date().getFullYear();
+
+// Three nav columns for the cinematic credit footer.
+const navGroups = [
+  {
+    title: "The Clinic",
+    links: [
+      { href: "/",           label: "Home" },
+      { href: "/about",      label: "About" },
+      { href: "/doctors",    label: "Doctors" },
+      { href: "/contact",    label: "Visit us" },
+    ],
+  },
+  {
+    title: "Care",
+    links: [
+      { href: "/treatments", label: "All treatments" },
+      { href: "/treatments#chemical-peels", label: "Chemical peels" },
+      { href: "/treatments#laser-hair-reduction", label: "Laser hair reduction" },
+      { href: "/treatments#pigmentation", label: "Pigmentation" },
+      { href: "/treatments#hair-loss", label: "Hair loss" },
+    ],
+  },
+  {
+    title: "Visit",
+    links: [
+      { href: "/book",       label: "Book a consult" },
+      { href: `tel:${site.phones[0].tel}`, label: site.phones[0].number },
+      { href: `tel:${site.phones[1].tel}`, label: site.phones[1].number },
+      { href: `mailto:${site.email}`,      label: site.email },
+    ],
+  },
+];
 ---
 
-<footer class="relative z-10 mt-24 bg-[var(--color-laurel)] text-[var(--color-cashmere-soft)] overflow-hidden">
-  <div class="absolute -top-24 -right-24 opacity-40 pointer-events-none" aria-hidden="true">
-    <Leaf size={260} color="var(--color-sage)" rotation={25} opacity={0.5} />
-  </div>
+{/*
+ * Footer — cinematic closing credits. Massive "A Project by Prodaxis" line
+ * after the contact + nav block, like the end-credit card of a film. Full
+ * site navigation lives here for accessibility / SEO completeness.
+ */}
+<footer class="relative z-10 mt-24 bg-[var(--color-ink)] text-[var(--color-paper)] overflow-hidden">
+  {/* Atmospheric corner washes */}
+  <div class="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full opacity-25 pointer-events-none" aria-hidden="true"
+       style="background: radial-gradient(circle, var(--color-rose-rich), transparent 65%);"></div>
+  <div class="absolute -bottom-40 -left-32 w-[700px] h-[700px] rounded-full opacity-20 pointer-events-none" aria-hidden="true"
+       style="background: radial-gradient(circle, var(--color-sky-deep), transparent 65%);"></div>
 
-  <div class="container-edge py-20 md:py-24 relative">
-    <div class="grid gap-14 md:grid-cols-12">
-      <div class="md:col-span-5">
-        <p class="eyebrow !text-[var(--color-rose-soft)]">Visit us</p>
-        <h2 class="display-2 mt-4 !text-[var(--color-cashmere-soft)]">
-          Care that <span class="accent-italic !text-[var(--color-rose)]">listens.</span>
-        </h2>
-        <p class="lead mt-6 !text-[color-mix(in_oklab,var(--color-cashmere-soft)_82%,transparent)] max-w-md">
-          We believe a good dermatologist explains before they prescribe. Walk in for a consult — or call ahead for a confirmed slot.
-        </p>
-        <div class="flex flex-wrap gap-3 mt-8">
-          <a href="/book" class="btn btn-rose">
-            Book Appointment
-            <span class="arrow" aria-hidden="true">→</span>
-          </a>
-          <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`} class="btn btn-ghost !border-[color-mix(in_oklab,var(--color-cashmere-soft)_25%,transparent)] !text-[var(--color-cashmere-soft)]">
-            WhatsApp
-          </a>
+  <div class="relative">
+    {/* PRIMARY BLOCK — visit + nav columns */}
+    <div class="container-edge pt-20 md:pt-28 pb-16 md:pb-20">
+      <div class="grid gap-14 lg:grid-cols-12">
+        {/* Brand panel */}
+        <div class="lg:col-span-5">
+          <p class="credit-line text-[var(--color-rose)] flex items-center gap-3">
+            <span class="w-6 h-px bg-[var(--color-rose)]"></span>
+            Visit us
+          </p>
+          <h2 class="display-2 mt-6 !text-[var(--color-paper)]">
+            Care that <span class="accent-italic !text-[var(--color-rose)]">listens.</span>
+          </h2>
+          <p class="lead mt-6 !text-[color-mix(in_oklab,var(--color-paper)_75%,transparent)] max-w-md">
+            Walk in for a consult — or call ahead for a confirmed slot. Our reception will reply the same business day.
+          </p>
+          <div class="flex flex-wrap gap-3 mt-8">
+            <a href="/book" class="btn btn-rose">
+              Book Appointment
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <a href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`} class="btn btn-ghost !border-[color-mix(in_oklab,var(--color-paper)_25%,transparent)] !text-[var(--color-paper)] hover:!bg-[var(--color-paper)] hover:!text-[var(--color-ink)]">
+              WhatsApp
+            </a>
+          </div>
+
+          {/* Address */}
+          <address class="not-italic mt-10 text-sm leading-relaxed text-[color-mix(in_oklab,var(--color-paper)_72%,transparent)]">
+            <span class="credit-line text-[var(--color-rose)] block mb-2">Address</span>
+            {site.address.line1}<br />
+            {site.address.line2}<br />
+            {site.address.area}, {site.address.city}<br />
+            {site.address.state} – {site.address.pincode}
+          </address>
         </div>
-      </div>
 
-      <div class="md:col-span-3">
-        <p class="eyebrow !text-[var(--color-rose-soft)]">Address</p>
-        <address class="not-italic mt-4 text-sm leading-relaxed text-[color-mix(in_oklab,var(--color-cashmere-soft)_78%,transparent)]">
-          {site.address.line1}<br />
-          {site.address.line2}<br />
-          {site.address.area}, {site.address.city}<br />
-          {site.address.state} – {site.address.pincode}
-        </address>
-      </div>
-
-      <div class="md:col-span-2">
-        <p class="eyebrow !text-[var(--color-rose-soft)]">Contact</p>
-        <ul class="mt-4 space-y-2 text-sm text-[color-mix(in_oklab,var(--color-cashmere-soft)_78%,transparent)]">
-          {site.phones.map((p) => (
-            <li><a href={`tel:${p.tel}`} class="hover:text-[var(--color-rose)]">{p.number}</a></li>
+        {/* Nav columns */}
+        <div class="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
+          {navGroups.map((group) => (
+            <div>
+              <p class="credit-line text-[var(--color-rose)] mb-5">{group.title}</p>
+              <ul class="space-y-3">
+                {group.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="text-sm text-[color-mix(in_oklab,var(--color-paper)_82%,transparent)] hover:text-[var(--color-rose)] transition-colors break-all"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-          <li><a href={`mailto:${site.email}`} class="hover:text-[var(--color-rose)] break-all">{site.email}</a></li>
-        </ul>
-      </div>
 
-      <div class="md:col-span-2">
-        <p class="eyebrow !text-[var(--color-rose-soft)]">Hours</p>
-        <ul class="mt-4 space-y-2 text-sm text-[color-mix(in_oklab,var(--color-cashmere-soft)_78%,transparent)]">
-          <li>Mon–Sat<br />{site.hours.weekdays.morning}<br />{site.hours.weekdays.evening}</li>
-          <li class="text-[var(--color-rose)]">Sunday — {site.hours.sunday}</li>
-        </ul>
+          {/* Hours */}
+          <div class="md:col-span-3 mt-2 grid grid-cols-2 md:grid-cols-3 gap-6 pt-6 border-t border-[color-mix(in_oklab,var(--color-paper)_10%,transparent)]">
+            <div>
+              <p class="credit-line text-[var(--color-rose)]">Mon – Sat (Morning)</p>
+              <p class="font-display font-light text-xl mt-2 !text-[var(--color-paper)]">{site.hours.weekdays.morning}</p>
+            </div>
+            <div>
+              <p class="credit-line text-[var(--color-rose)]">Mon – Sat (Evening)</p>
+              <p class="font-display font-light text-xl mt-2 !text-[var(--color-paper)]">{site.hours.weekdays.evening}</p>
+            </div>
+            <div>
+              <p class="credit-line text-[var(--color-rose)]">Sunday</p>
+              <p class="font-display font-light text-xl mt-2 !text-[var(--color-rose)]">{site.hours.sunday}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="mt-16 pt-8 border-t border-[color-mix(in_oklab,var(--color-cashmere-soft)_15%,transparent)] flex flex-col md:flex-row gap-4 items-start md:items-center justify-between text-xs text-[color-mix(in_oklab,var(--color-cashmere-soft)_55%,transparent)]">
-      <p>© {year} {site.name}. Established {site.established}.</p>
-      <p class="flex items-center gap-2">
-        Crafted by
-        <a href="https://prodaxis.in" class="underline underline-offset-4 hover:text-[var(--color-rose)]">
+    {/* DIVIDER */}
+    <div class="container-edge">
+      <div class="hairline opacity-30"></div>
+    </div>
+
+    {/* CINEMATIC CREDIT — end-credits style */}
+    <div class="relative container-edge py-16 md:py-24 text-center">
+      <p class="credit-line text-[var(--color-rose)]">A Project by</p>
+
+      {/* Massive Prodaxis lockup */}
+      <a
+        href="https://prodaxis.in"
+        target="_blank"
+        rel="noopener"
+        class="group inline-flex items-baseline gap-3 mt-5 hover:opacity-80 transition-opacity"
+      >
+        <span class="font-display font-extralight text-[clamp(3.5rem,10vw,9rem)] leading-none tracking-[-0.05em] !text-[var(--color-paper)]">
           Prodaxis
-        </a>
+        </span>
+        <span class="font-display font-extralight text-[clamp(2rem,5vw,4rem)] leading-none !text-[var(--color-rose)] italic">
+          .in
+        </span>
+      </a>
+
+      <p class="mt-7 text-sm md:text-base text-[color-mix(in_oklab,var(--color-paper)_70%,transparent)] max-w-xl mx-auto leading-relaxed">
+        End-to-end digital platforms for healthcare, hospitality and small business —
+        designed, built and supported by a single team.
       </p>
+
+      <div class="mt-9 flex items-center justify-center gap-2 text-[var(--color-rose)]" aria-hidden="true">
+        <span class="w-1 h-1 rounded-full bg-current"></span>
+        <span class="w-2 h-2 rounded-full bg-current"></span>
+        <span class="w-1 h-1 rounded-full bg-current"></span>
+      </div>
+
+      <a
+        href="mailto:hello@prodaxis.in"
+        class="inline-block mt-7 credit-line !text-[0.68rem] !text-[var(--color-paper)] underline underline-offset-[6px] decoration-[var(--color-rose)] decoration-2"
+      >
+        hello@prodaxis.in
+      </a>
+    </div>
+
+    {/* TINY LEGAL FOOTER */}
+    <div class="container-edge pb-10 pt-8 border-t border-[color-mix(in_oklab,var(--color-paper)_10%,transparent)]">
+      <div class="flex flex-col md:flex-row gap-3 items-center justify-between text-[0.68rem] uppercase tracking-[0.22em] font-bold text-[color-mix(in_oklab,var(--color-paper)_50%,transparent)]">
+        <p>© {year} {site.fullName}</p>
+        <p>Established {site.established} · Kadapa, Andhra Pradesh</p>
+      </div>
     </div>
   </div>
 </footer>

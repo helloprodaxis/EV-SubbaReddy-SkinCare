@@ -1,8 +1,8 @@
 ---
 /**
- * Custom-drawn botanical bouquet — pure SVG, no copyright risk.
- * Inspired by Tata Harper / Augustinus Bader product photography composition,
- * but every shape is hand-built here so we own the asset.
+ * Custom-drawn spa composition — a sky-blue ceramic vessel with soft pink
+ * ranunculus blooms. Pure SVG, our composition, zero copyright risk.
+ * Combines the brand's pink and blue accents in one motif.
  */
 interface Props {
   width?: number;
@@ -22,73 +22,77 @@ const { width = 380, height = 520, class: className = "" } = Astro.props;
 >
   <defs>
     <radialGradient id="rose-1" cx="0.5" cy="0.4" r="0.6">
-      <stop offset="0" stop-color="#f3cdce"/>
-      <stop offset="0.6" stop-color="#eba6a9"/>
-      <stop offset="1" stop-color="#d77f83"/>
+      <stop offset="0" stop-color="#fde7e8"/>
+      <stop offset="0.55" stop-color="#eba6a9"/>
+      <stop offset="1" stop-color="#c97583"/>
     </radialGradient>
     <radialGradient id="rose-2" cx="0.4" cy="0.4" r="0.7">
-      <stop offset="0" stop-color="#f7d9da"/>
+      <stop offset="0" stop-color="#fce5e5"/>
       <stop offset="1" stop-color="#e89a9d"/>
     </radialGradient>
     <radialGradient id="rose-3" cx="0.5" cy="0.5" r="0.55">
-      <stop offset="0" stop-color="#fce5e5"/>
+      <stop offset="0" stop-color="#fdf0f0"/>
       <stop offset="1" stop-color="#e5acaf"/>
     </radialGradient>
-    <linearGradient id="leaf-grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#b0beb1"/>
-      <stop offset="1" stop-color="#6b7466"/>
+    <linearGradient id="stem" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a8590"/>
+      <stop offset="1" stop-color="#2a3741"/>
     </linearGradient>
-    <linearGradient id="stem-grad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#899183"/>
-      <stop offset="1" stop-color="#2d362b"/>
+    <linearGradient id="leaf-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dce7ee"/>
+      <stop offset="1" stop-color="#5c7a8a"/>
     </linearGradient>
-    <linearGradient id="wrap" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#f3cdce" stop-opacity="0.95"/>
-      <stop offset="1" stop-color="#d77f83" stop-opacity="0.85"/>
+    <linearGradient id="vase" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dce7ee"/>
+      <stop offset="0.55" stop-color="#b8ccd9"/>
+      <stop offset="1" stop-color="#5c7a8a"/>
+    </linearGradient>
+    <linearGradient id="vase-shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="0.45" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
     <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
       <feGaussianBlur stdDeviation="0.6"/>
     </filter>
   </defs>
 
-  {/* Stems — slightly fanned */}
-  <g stroke="url(#stem-grad)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9">
-    <path d="M 190 320 Q 188 380 180 480"/>
-    <path d="M 150 310 Q 145 390 130 480"/>
-    <path d="M 230 315 Q 235 390 250 480"/>
-    <path d="M 170 300 Q 165 380 155 480"/>
-    <path d="M 210 305 Q 215 390 225 480"/>
-    <path d="M 130 320 Q 110 400 95 480"/>
-    <path d="M 250 320 Q 270 400 285 480"/>
+  {/* Stems descending into the vase */}
+  <g stroke="url(#stem)" stroke-width="2.8" stroke-linecap="round" fill="none" opacity="0.85">
+    <path d="M 190 320 Q 188 360 185 410"/>
+    <path d="M 150 310 Q 145 360 152 410"/>
+    <path d="M 230 315 Q 235 360 225 410"/>
+    <path d="M 170 300 Q 165 355 175 410"/>
+    <path d="M 210 305 Q 215 355 205 410"/>
+    <path d="M 130 320 Q 130 365 145 410"/>
+    <path d="M 250 320 Q 250 365 235 410"/>
   </g>
 
-  {/* Leaves — small ellipses along stems */}
-  <g fill="url(#leaf-grad)" opacity="0.85">
+  {/* Blue eucalyptus-like leaves */}
+  <g fill="url(#leaf-blue)" opacity="0.9">
     <ellipse cx="175" cy="370" rx="14" ry="6" transform="rotate(-30 175 370)"/>
     <ellipse cx="205" cy="380" rx="14" ry="6" transform="rotate(28 205 380)"/>
     <ellipse cx="148" cy="395" rx="12" ry="5" transform="rotate(-40 148 395)"/>
     <ellipse cx="232" cy="400" rx="12" ry="5" transform="rotate(35 232 400)"/>
-    <ellipse cx="118" cy="410" rx="13" ry="5" transform="rotate(-50 118 410)"/>
-    <ellipse cx="262" cy="415" rx="13" ry="5" transform="rotate(45 262 415)"/>
+    <ellipse cx="118" cy="380" rx="13" ry="5" transform="rotate(-50 118 380)"/>
+    <ellipse cx="262" cy="385" rx="13" ry="5" transform="rotate(45 262 385)"/>
     <ellipse cx="195" cy="430" rx="10" ry="4" transform="rotate(15 195 430)"/>
   </g>
 
-  {/* Wrap (kraft paper bouquet base) */}
+  {/* CERAMIC VASE — sky-blue with soft shine */}
   <path
-    d="M 60 460 Q 70 430 105 420 L 275 420 Q 310 430 320 460 L 305 510 L 75 510 Z"
-    fill="url(#wrap)"
-    opacity="0.55"
+    d="M 130 410 L 250 410 Q 270 415 270 430 L 270 480 Q 270 505 240 510 L 140 510 Q 110 505 110 480 L 110 430 Q 110 415 130 410 Z"
+    fill="url(#vase)"
   />
   <path
-    d="M 60 460 Q 70 430 105 420 L 275 420 Q 310 430 320 460"
-    stroke="#d77f83"
-    stroke-width="0.8"
-    stroke-opacity="0.7"
-    fill="none"
+    d="M 130 410 L 250 410 Q 270 415 270 430 L 270 480 Q 270 505 240 510 L 140 510 Q 110 505 110 480 L 110 430 Q 110 415 130 410 Z"
+    fill="url(#vase-shine)"
   />
+  {/* Vase rim shadow */}
+  <ellipse cx="190" cy="412" rx="60" ry="5" fill="#2a3741" opacity="0.25"/>
+  {/* Vase rim highlight */}
+  <path d="M 130 412 Q 190 405 250 412" stroke="#ffffff" stroke-width="1" stroke-opacity="0.6" fill="none"/>
 
-  {/* Roses — layered ranunculus-style petal stacks */}
-  {/* Back row */}
+  {/* ROSES — back row */}
   <g filter="url(#soft)">
     <circle cx="105" cy="285" r="42" fill="url(#rose-3)"/>
     <circle cx="280" cy="280" r="40" fill="url(#rose-3)"/>
@@ -103,22 +107,21 @@ const { width = 380, height = 520, class: className = "" } = Astro.props;
   {/* Front centre rose with petal layering */}
   <g>
     <circle cx="195" cy="285" r="46" fill="url(#rose-1)"/>
-    {/* Inner petal swirls */}
-    <path d="M 195 250 Q 215 260 218 280 Q 218 300 200 305 Q 178 305 175 285 Q 175 265 195 250 Z" fill="#d77f83" opacity="0.5"/>
-    <path d="M 195 268 Q 207 274 208 287 Q 207 298 196 300 Q 184 298 184 286 Q 184 274 195 268 Z" fill="#a85f63" opacity="0.45"/>
-    <circle cx="195" cy="285" r="6" fill="#8a4549" opacity="0.55"/>
+    <path d="M 195 250 Q 215 260 218 280 Q 218 300 200 305 Q 178 305 175 285 Q 175 265 195 250 Z" fill="#c97583" opacity="0.5"/>
+    <path d="M 195 268 Q 207 274 208 287 Q 207 298 196 300 Q 184 298 184 286 Q 184 274 195 268 Z" fill="#a04a5a" opacity="0.5"/>
+    <circle cx="195" cy="285" r="6" fill="#722f3d" opacity="0.6"/>
   </g>
 
   {/* Small buds */}
   <g>
-    <circle cx="90" cy="245" r="14" fill="#eba6a9" opacity="0.85"/>
-    <circle cx="295" cy="240" r="14" fill="#eba6a9" opacity="0.85"/>
-    <circle cx="155" cy="180" r="13" fill="#f3cdce" opacity="0.9"/>
-    <circle cx="240" cy="175" r="13" fill="#f3cdce" opacity="0.9"/>
+    <circle cx="90" cy="245" r="14" fill="#eba6a9" opacity="0.9"/>
+    <circle cx="295" cy="240" r="14" fill="#eba6a9" opacity="0.9"/>
+    <circle cx="155" cy="180" r="13" fill="#fde7e8" opacity="0.95"/>
+    <circle cx="240" cy="175" r="13" fill="#fde7e8" opacity="0.95"/>
   </g>
 
-  {/* Wisp leaves at the top — eucalyptus-style */}
-  <g fill="url(#leaf-grad)" opacity="0.7">
+  {/* Wisp leaves at the top */}
+  <g fill="url(#leaf-blue)" opacity="0.7">
     <ellipse cx="135" cy="155" rx="9" ry="4" transform="rotate(-45 135 155)"/>
     <ellipse cx="125" cy="135" rx="8" ry="4" transform="rotate(-50 125 135)"/>
     <ellipse cx="115" cy="115" rx="7" ry="3" transform="rotate(-55 115 115)"/>
@@ -130,5 +133,5 @@ const { width = 380, height = 520, class: className = "" } = Astro.props;
   </g>
 
   {/* Soft outer glow */}
-  <ellipse cx="195" cy="280" rx="180" ry="220" fill="#eba6a9" opacity="0.06"/>
+  <ellipse cx="195" cy="280" rx="180" ry="220" fill="#eba6a9" opacity="0.05"/>
 </svg>
